@@ -6,7 +6,7 @@ using UnityEngine.Serialization;
 namespace Struct
 {
     [Serializable]
-    public struct Sound
+    public struct SoundInfo
     {
         [FormerlySerializedAs("name")] public Enum.SoundName Name;
         [Range(0, 1)] public float volume;
@@ -14,4 +14,4 @@ namespace Struct
         [FormerlySerializedAs("sound")] public AudioClip AudioClip;
     }
 }
-    
+ 

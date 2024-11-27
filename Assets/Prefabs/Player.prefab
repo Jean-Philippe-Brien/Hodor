@@ -35,6 +35,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4460865795519219834}
+  - {fileID: 2121470211573807757}
   m_Father: {fileID: 7860556158681761784}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &2731112425557449405
@@ -152,76 +153,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4c71ced8dd24f949899fd6b60fe100c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpeed: 5
-  acceleration: 10
-  directionAction:
-    m_Name: Direction Pressed
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 2b7f7833-ee0f-4b62-9b75-f755f4694dde
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: Wasd
-      m_Id: 70f0987d-b7ec-4787-a2d3-f3b9a3db6fd5
-      m_Path: 2DVector
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Direction Pressed
-      m_Flags: 4
-    - m_Name: up
-      m_Id: 621e4d75-5e72-4ef3-bc55-01abeb45dc1e
-      m_Path: <Keyboard>/w
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Direction Pressed
-      m_Flags: 8
-    - m_Name: down
-      m_Id: dd7b70e0-5f56-4131-9ec2-dc4fd29ed205
-      m_Path: <Keyboard>/s
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Direction Pressed
-      m_Flags: 8
-    - m_Name: left
-      m_Id: 0b878912-f07e-47de-8bdb-d7fef2c5548c
-      m_Path: <Keyboard>/a
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Direction Pressed
-      m_Flags: 8
-    - m_Name: right
-      m_Id: 8518a94b-0fd2-4613-a10b-8fc0ff47f400
-      m_Path: <Keyboard>/d
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Direction Pressed
-      m_Flags: 8
-    m_Flags: 0
-  jumpAction:
-    m_Name: Jump
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: b2798c22-21f1-4b79-b3d4-b9c5eb2a6e53
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: 
-      m_Id: 4b46fb57-0a44-4eae-a4bd-e9b78ad39cb9
-      m_Path: <Keyboard>/space
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Jump
-      m_Flags: 0
-    m_Flags: 0
-  rotationSpeed: 2
-  jumpForce: 5
+  groundDetection: {fileID: 7611781446456055659}
 --- !u!1 &2789029522823358623
 GameObject:
   m_ObjectHideFlags: 0
@@ -254,6 +186,73 @@ Transform:
   - {fileID: 6270967200368131264}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2869621742278253494
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2121470211573807757}
+  - component: {fileID: 267308930110120909}
+  - component: {fileID: 7611781446456055659}
+  m_Layer: 0
+  m_Name: GroundDetection
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2121470211573807757
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2869621742278253494}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -1.108, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6270967200368131264}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &267308930110120909
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2869621742278253494}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 64
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 0.25, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7611781446456055659
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2869621742278253494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 302e79e5b1ec4695b40cf91faeb9eabf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isGrounded: 1
 --- !u!1 &7990864345112830842
 GameObject:
   m_ObjectHideFlags: 0

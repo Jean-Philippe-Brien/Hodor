@@ -15,7 +15,7 @@ MonoBehaviour:
   maxSpeed: 5
   acceleration: 10
   rotationSpeed: 5
-  jumpForce: 5
+  jumpForce: 7
   directionAction:
     m_Name: Direction
     m_Type: 0

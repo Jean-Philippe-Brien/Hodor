@@ -620,7 +620,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &553304511
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1026,12 +1026,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
+  m_fontSize: 30
   m_fontSizeBase: 36
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_fontSizeMax: 30
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -1963,8 +1963,9 @@ MonoBehaviour:
   messageText: {fileID: 1122376259}
   point: {fileID: 1674366047}
   timer: {fileID: 1564257332}
-  endMessage: {fileID: 0}
-  restartButton: {fileID: 0}
+  endScreen: {fileID: 553304511}
+  endMessage: {fileID: 929879786}
+  restartButton: {fileID: 1528047882}
 --- !u!1 &1852986938
 GameObject:
   m_ObjectHideFlags: 0
@@ -2173,6 +2174,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 413500728}
     m_Modifications:
+    - target: {fileID: 111665976361825813, guid: 7c57702b94a001744b9c7b4c5aad58f0, type: 3}
+      propertyPath: m_Size.x
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 111665976361825813, guid: 7c57702b94a001744b9c7b4c5aad58f0, type: 3}
+      propertyPath: m_Size.z
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 4336781399077837597, guid: 7c57702b94a001744b9c7b4c5aad58f0, type: 3}
       propertyPath: m_Name
       value: Level1

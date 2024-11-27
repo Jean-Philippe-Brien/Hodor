@@ -11,7 +11,7 @@ namespace Manager
         public static SoundManager Instance;
 
         private AudioSource audioSource;
-        private Dictionary<Enum.SoundName, Sound> soundsList = new Dictionary<Enum.SoundName, Sound>();
+        private Dictionary<Enum.SoundName, SoundInfo> soundsList = new Dictionary<Enum.SoundName, SoundInfo>();
     
         private void Awake()
         {

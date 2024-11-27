@@ -1,6 +1,3 @@
-# Hodor
-Chaac test
-
 
 # HODOR
 
@@ -92,10 +89,23 @@ Script
 &emsp;&emsp;Class to create all struct of the game  
 &emsp;&emsp;&emsp;-SoundData();
   
-  
+# Tuto
+
 CREATE COINS  
 &emsp;1-Make a prefab of the coin (prefab need to have Coin script on it and a trigger collider)  
 &emsp;2-Go in (Asset/Resources/Coins) and create a new CoinData (ScriptableObject)  
 &emsp;3-Fill data and include the prefab in coinPrefab  
 &emsp;4-Enjoy  
 
+Create level  
+&emsp;1- Create a level in editor   
+&emsp;3- Put level script on root of your level  
+&emsp;4- Refer all Dependencie in inspector  
+&emsp;5- Replace the level in LevelManager value with the new level  
+
+# optimization idea
+1-Create interface for coin  
+2-Make factory for coin  
+3-Modify PlayerData to PlayerMovementData and make a mother abstract class call PlayerMovementData  
+&emsp;Add abstract method call GetDirection  
+&emsp;Advantage: can be used by player and a future ia  

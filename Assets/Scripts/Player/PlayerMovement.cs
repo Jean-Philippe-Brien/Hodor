@@ -9,6 +9,7 @@ namespace Player
     {
         private PlayerData data;
         private Rigidbody rigidbody;
+        [SerializeField] private GroundDetection groundDetection;
 
         private void Awake()
         {
@@ -37,6 +38,8 @@ namespace Player
     
         private void OnJump(InputAction.CallbackContext context)
         {
+            if (!groundDetection.isGrounded) return;
+            
             rigidbody.AddForce(Vector3.up * data.JumpForce, ForceMode.VelocityChange);
         }
 
