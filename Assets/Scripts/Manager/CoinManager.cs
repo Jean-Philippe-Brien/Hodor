@@ -24,6 +24,7 @@ public class CoinManager : MonoBehaviour
 
     private void OnCoinCollected(Coin coin)
     {
+        SoundManager.Instance.PlaySoundOneShot(Enum.SoundName.CollectCoin);
         RemoveCoinFromList(coin);
         FillCoinList();
     }

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -5,10 +6,19 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
     
     public delegate void UnlockingDoor();
+    public delegate void ModifyPoint(int point);
     public static UnlockingDoor OnUnlockingDoor;
+    public static ModifyPoint OnModifyPoint;
     public int PointToUnlockLevel;
 
+    private float timer = 0;
     private int point = 0;
+
+    public float Timer
+    {
+        get => timer;
+        set => timer = value;
+    }
 
     public int Point
     {
@@ -18,6 +28,7 @@ public class GameManager : MonoBehaviour
             if (value >= 0)
             {
                 point = value;
+                OnModifyPoint?.Invoke(point);
                 Debug.Log(point);
             }
 
@@ -36,5 +47,10 @@ public class GameManager : MonoBehaviour
         }
 
         Instance = this;
+    }
+
+    private void Update()
+    {
+        timer += Time.deltaTime;
     }
 }

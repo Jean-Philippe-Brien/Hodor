@@ -3,16 +3,10 @@ using UnityEngine;
 [RequireComponent(typeof(Animation))]
 public class Door : MonoBehaviour
 {
-    public enum DoorState
-    {
-        DoorOpen,
-        DoorClose,
-        Idle
-    }
 
-    private DoorState state = DoorState.Idle;
+    private Enum.DoorState state = Enum.DoorState.Idle;
 
-    public DoorState State
+    public Enum.DoorState State
     {
         get => state;
         set
@@ -33,10 +27,10 @@ public class Door : MonoBehaviour
 
     private void Start()
     {
-        GameManager.OnUnlockingDoor += () => OnUnlockDoor(DoorState.DoorOpen);
+        GameManager.OnUnlockingDoor += () => OnUnlockDoor(Enum.DoorState.DoorOpen);
     }
 
-    private void OnUnlockDoor(DoorState stateChoose)
+    private void OnUnlockDoor(Enum.DoorState stateChoose)
     {
         State = stateChoose;
     }
