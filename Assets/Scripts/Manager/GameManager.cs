@@ -1,56 +1,53 @@
-using System;
+using Delegate;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+namespace Manager
 {
-    public static GameManager Instance;
+    public class GameManager : MonoBehaviour
+    {
+        public static GameManager Instance;
     
-    public delegate void UnlockingDoor();
-    public delegate void ModifyPoint(int point);
-    public static UnlockingDoor OnUnlockingDoor;
-    public static ModifyPoint OnModifyPoint;
-    public int PointToUnlockLevel;
+        public static event GameEvent.UnlockingDoor OnUnlockingDoor;
+        public static event GameEvent.ModifyPoint OnModifyPoint;
+        public int PointToUnlockLevel;
 
-    private float timer = 0;
-    private int point = 0;
+        private float timer = 0;
+        private int point = 0;
 
-    public float Timer
-    {
-        get => timer;
-        set => timer = value;
-    }
+        public float Timer => timer;
 
-    public int Point
-    {
-        get => point;
-        set
+        public int Point
         {
-            if (value >= 0)
+            get => point;
+            set
             {
-                point = value;
-                OnModifyPoint?.Invoke(point);
-                Debug.Log(point);
-            }
+                if (value >= 0)
+                {
+                    point = value;
+                    OnModifyPoint?.Invoke(point);
+                    Debug.Log(point);
+                }
 
-            if (value >= PointToUnlockLevel)
-            {
-                OnUnlockingDoor?.Invoke();
+                if (value >= PointToUnlockLevel)
+                {
+                    OnUnlockingDoor?.Invoke();
+                }
             }
         }
-    }
 
-    private void Awake()
-    {
-        if (Instance != null)
+        private void Awake()
         {
-            Debug.LogError(Instance.name + " conflict with:\n" + this.name + " Managers Cannot be duplicated");
+            if (Instance != null)
+            {
+                Debug.LogError($"{Instance.gameObject.name} conflict with: {gameObject.name} Managers Cannot be duplicated");
+            }
+
+            Instance = this;
         }
 
-        Instance = this;
-    }
-
-    private void Update()
-    {
-        timer += Time.deltaTime;
+        private void Update()
+        {
+            timer += Time.deltaTime;
+        }
     }
 }

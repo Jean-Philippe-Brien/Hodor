@@ -1,71 +1,68 @@
+using ScriptableObjects;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(Rigidbody))]
-public class PlayerMovement : MonoBehaviour
+namespace Player
 {
-    public float maxSpeed;
-    public float acceleration;
-    public float rotationSpeed;
-    public float jumpForce;
-    public InputAction directionAction;
-    public InputAction jumpAction;
-    
-    private Rigidbody _rigidbody;
-    
-
-    private void Awake()
+    [RequireComponent(typeof(Rigidbody))]
+    public class PlayerMovement : MonoBehaviour
     {
-        jumpAction.performed += OnJump;
-        _rigidbody = GetComponent<Rigidbody>();
-    }
+        private PlayerData data;
+        private Rigidbody rigidbody;
 
-    private void OnEnable()
-    {
-        directionAction.Enable();
-        
-        jumpAction.Enable();
-    }
-
-    private void OnDisable()
-    {
-        directionAction.Disable();
-        jumpAction.Disable();
-    }
-
-    private void FixedUpdate()
-    {
-        ApplyRotation();
-        ApplyLinearMovement();
-    }
-    
-    private void OnJump(InputAction.CallbackContext context)
-    {
-        Debug.Log("Jump");
-        _rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.VelocityChange);
-    }
-
-    private Vector2 GetDirectionPressed()
-    {
-        return directionAction.ReadValue<Vector2>();
-    }
-
-    private void ApplyLinearMovement()
-    {
-        var direction = transform.forward * GetDirectionPressed().y;
-        
-        direction.y = 0;
-        direction = direction.normalized;
-
-        if (_rigidbody.linearVelocity.magnitude < maxSpeed)
+        private void Awake()
         {
-            _rigidbody.AddForce(direction * acceleration);
+            data = Resources.Load<PlayerData>("ScriptableObject/PlayerData");
+            data.JumpAction.performed += OnJump;
+            rigidbody = GetComponent<Rigidbody>();
         }
 
-    }
+        private void OnEnable()
+        {
+            data.DirectionAction.Enable();
+            data.JumpAction.Enable();
+        }
 
-    private void ApplyRotation()
-    {
-        _rigidbody.angularVelocity = Vector3.up * (rotationSpeed * GetDirectionPressed().x);
+        private void OnDisable()
+        {
+            data.DirectionAction.Disable();
+            data.JumpAction.Disable();
+        }
+
+        private void FixedUpdate()
+        {
+            ApplyRotation();
+            ApplyLinearMovement();
+        }
+    
+        private void OnJump(InputAction.CallbackContext context)
+        {
+            Debug.Log("Jump");
+            rigidbody.AddForce(Vector3.up * data.JumpForce, ForceMode.VelocityChange);
+        }
+
+        private Vector2 GetDirectionPressed()
+        {
+            return data.DirectionAction.ReadValue<Vector2>();
+        }
+
+        private void ApplyLinearMovement()
+        {
+            var direction = transform.forward * GetDirectionPressed().y;
+        
+            direction.y = 0;
+            direction = direction.normalized;
+
+            if (rigidbody.linearVelocity.magnitude < data.MaxSpeed)
+            {
+                rigidbody.AddForce(direction * data.Acceleration);
+            }
+
+        }
+
+        private void ApplyRotation()
+        {
+            rigidbody.angularVelocity = Vector3.up * (data.RotationSpeed * GetDirectionPressed().x);
+        }
     }
 }

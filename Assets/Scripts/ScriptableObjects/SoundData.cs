@@ -1,31 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Struct;
 using UnityEngine;
-using UnityEngine.Audio;
 
-[CreateAssetMenu(fileName = "SoundData", menuName = "ScriptableObject/SoundData")]
-public class SoundData : ScriptableObject
+namespace ScriptableObjects
 {
-    public List<Sound> Sounds;
-
-    public Dictionary<Enum.SoundName, Sound> GetSoundLists()
+    [CreateAssetMenu(fileName = "SoundData", menuName = "ScriptableObject/SoundData")]
+    public class SoundData : ScriptableObject
     {
-        Dictionary<Enum.SoundName, Sound> soundsList = new Dictionary<Enum.SoundName, Sound>();
-        
-        foreach (var sound in Sounds)
+        [SerializeField] private List<Sound> Sounds;
+
+        public Dictionary<Enum.SoundName, Sound> GetSoundLists()
         {
-            soundsList.Add(sound.name, sound);
+            Dictionary<Enum.SoundName, Sound> soundsList = new Dictionary<Enum.SoundName, Sound>();
+        
+            foreach (var sound in Sounds)
+            {
+                soundsList.Add(sound.name, sound);
+            }
+
+            return soundsList;
         }
-
-        return soundsList;
     }
-}
-
-[Serializable]
-public struct Sound
-{
-    public Enum.SoundName name;
-    [Range(0, 1)] public float volume;
-    public AudioMixerGroup mixer;
-    public AudioClip sound;
 }

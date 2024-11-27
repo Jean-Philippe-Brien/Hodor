@@ -1,4 +1,5 @@
-﻿public static class Enum
+﻿
+public static class Enum
 {
     public enum DoorState
     {
@@ -6,7 +7,7 @@
         DoorClose,
         Idle,
     }
-    
+
     public enum SoundName
     {
         CollectCoin,

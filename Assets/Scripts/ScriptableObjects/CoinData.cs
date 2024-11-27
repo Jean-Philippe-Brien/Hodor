@@ -1,16 +1,19 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "CoinData", menuName = "ScriptableObject/CoinData")]
-public class CoinData : ScriptableObject
+namespace ScriptableObjects
 {
+    [CreateAssetMenu(fileName = "CoinData", menuName = "ScriptableObject/CoinData")]
+    public class CoinData : ScriptableObject
+    {
     
-    [SerializeField] private int coinValue;
-    [SerializeField] private AudioClip takeCoinSound;
-    [SerializeField] private GameObject coinPrefab;
+        [SerializeField] private int coinValue;
+        [SerializeField] private Enum.SoundName takeCoinSound;
+        [SerializeField] private GameObject coinPrefab;
 
-    public int CoinValue => coinValue;
+        public int CoinValue => coinValue;
 
-    public AudioClip TakeCoinSound => takeCoinSound;
+        public Enum.SoundName TakeCoinSound => takeCoinSound;
 
-    public GameObject CoinPrefab => coinPrefab;
+        public GameObject CoinPrefab => coinPrefab;
+    }
 }

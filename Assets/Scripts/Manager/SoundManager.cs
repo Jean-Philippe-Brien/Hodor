@@ -1,34 +1,33 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using ScriptableObjects;
+using Struct;
 using UnityEngine;
-using UnityEngine.Audio;
 
-[RequireComponent(typeof(AudioSource))]
-public class SoundManager : MonoBehaviour
+namespace Manager
 {
-    public static SoundManager Instance;
+    [RequireComponent(typeof(AudioSource))]
+    public class SoundManager : MonoBehaviour
+    {
+        public static SoundManager Instance;
 
-    private AudioSource audioSource;
-    private Dictionary<Enum.SoundName, Sound> soundLists = new Dictionary<Enum.SoundName, Sound>();
+        private AudioSource audioSource;
+        private Dictionary<Enum.SoundName, Sound> soundsList = new Dictionary<Enum.SoundName, Sound>();
     
-    private void Awake()
-    {
-        if (Instance != null)
+        private void Awake()
         {
-            Debug.LogError(Instance.gameObject.name + " conflict with:\n" + gameObject.name + " Managers Cannot be duplicated");
+            if (Instance != null)
+            {
+                Debug.LogError($"{Instance.gameObject.name} conflict with: {gameObject.name} Managers Cannot be duplicated");
+            }
+
+            Instance = this;
+            audioSource = GetComponent<AudioSource>();
+            soundsList = Resources.Load<SoundData>("ScriptableObject/Sounds/SoundData").GetSoundLists();
         }
 
-        Instance = this;
-        audioSource = GetComponent<AudioSource>();
-        soundLists = Resources.Load<SoundData>("ScriptableObject/Sounds/SoundData").GetSoundLists();
-        foreach (var VARIABLE in soundLists)
+        public void PlaySoundOneShot(Enum.SoundName soundName)
         {
-            Debug.Log(VARIABLE.Key);
+            audioSource.PlayOneShot(soundsList[soundName].sound);
         }
-    }
-
-    public void PlaySoundOneShot(Enum.SoundName soundName)
-    {
-        audioSource.PlayOneShot(soundLists[soundName].sound);
     }
 }
