@@ -1,15 +1,15 @@
 # Hodor
 Chaac test
 
-HOW TO PLAY
-	Summary
-		Have to collect X amount of coin to open a door
-	Control
-		-W = Forward
-		-S = Backward
-		-A = Left
-		-D = Righr
-		-Space = Jump
+HOW TO PLAY  
+	Summary  
+		Have to collect X amount of coin to open a door  
+	Control  
+		-W = Forward  
+		-S = Backward  
+		-A = Left  
+		-D = Righr  
+		-Space = Jump  
 
 FEATURE
 	Player
@@ -78,3 +78,8 @@ Tech Design
 		Class to create all Delegate of the game (event)
 	Struct
 		Class to create all struct of the game
+		
+CREATE COINS
+	1-Make a prefab of the coin (prefab need to have Coin script on it)
+	2-Go in (Asset/Resources/Coins) and create a new CoinData (ScriptableObject)
+	3-Fill data and include the prefab in coinPrefab
