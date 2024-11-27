@@ -1,4 +1,5 @@
 using Delegate;
+using Struct;
 using UnityEngine;
 
 namespace Manager
@@ -9,7 +10,6 @@ namespace Manager
     
         public static event GameEvent.UnlockingDoor OnUnlockingDoor;
         public static event GameEvent.ModifyPoint OnModifyPoint;
-        public static event GameEvent.GameStart OnGameStart;
         
         public float Timer => timer;
 
@@ -49,12 +49,6 @@ namespace Manager
         {
             updateTimer = true;
             LevelManager.OnEndLevel += OnEndLevel;
-            OnGameStart?.Invoke();
-        }
-
-        private void OnEndLevel()
-        {
-            updateTimer = false;
         }
 
         private void Update()
@@ -66,6 +60,11 @@ namespace Manager
         private void UpdateTimer()
         {
             timer += Time.deltaTime;
+        }
+        
+        private void OnEndLevel(EndLevelInfo endlevelinfo)
+        {
+            updateTimer = false;
         }
     }
 }

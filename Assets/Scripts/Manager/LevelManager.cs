@@ -1,5 +1,6 @@
 ﻿using Delegate;
 using Object;
+using Struct;
 using UnityEngine;
 
 namespace Manager
@@ -29,7 +30,7 @@ namespace Manager
 
         private void OnExitLevelBoxPass()
         {
-            OnEndLevel?.Invoke();
+            OnEndLevel?.Invoke(new EndLevelInfo(GameManager.Instance.Point, GameManager.Instance.Timer));
         }
     }
 }

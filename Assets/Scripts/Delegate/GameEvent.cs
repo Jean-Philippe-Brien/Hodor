@@ -1,4 +1,5 @@
 ﻿using Object;
+using Struct;
 
 namespace Delegate
 {
@@ -9,7 +10,8 @@ namespace Delegate
         public delegate void CoinLoot(Coin coin);
         public delegate void GameStart();
         public delegate void StartLevel();
-        public delegate void EndLevel();
+
+        public delegate void EndLevel(EndLevelInfo endLevelInfo);
         public delegate void ExitLevelBoxPass();
     }
 }
