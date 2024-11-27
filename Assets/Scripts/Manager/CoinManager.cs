@@ -49,7 +49,6 @@ public class CoinManager : MonoBehaviour
     private Coin CreateCoin(CoinData data)
     {
         var coin = Instantiate(data.CoinPrefab, coinsContainer).GetComponent<Coin>();
-        coin.playsound();
         coin.Initialize(data.CoinValue, data.TakeCoinSound);
         //Magic Number !!!!!! update after level script
         coin.transform.position = new Vector3(Random.Range(-10, 10), 1.5f, Random.Range(-10, 10));

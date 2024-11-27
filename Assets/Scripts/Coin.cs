@@ -19,9 +19,4 @@ public class Coin : MonoBehaviour
         onCoinLoot?.Invoke(this);
         Destroy(gameObject);
     }
-
-    public void playsound()
-    {
-        throw new System.NotImplementedException();
-    }
 }
