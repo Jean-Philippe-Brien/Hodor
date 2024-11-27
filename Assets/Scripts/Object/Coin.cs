@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace Object
 {
+[RequireComponent(typeof(Collider))]
     public class Coin : MonoBehaviour
     {
         public static event GameEvent.OnCoinLoot OnCoinCollected;

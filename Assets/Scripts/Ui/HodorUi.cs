@@ -18,7 +18,7 @@ namespace Object
 
         private void Update()
         {
-            timer.text = $"Timer: {GameManager.Instance.Timer}";
+            timer.text = $"Timer: {GameManager.Instance.Timer:F2}";
         }
 
         private void OnUnlockingDoor()

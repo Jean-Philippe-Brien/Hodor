@@ -48,7 +48,7 @@ namespace Manager
         
             while (coins.Count < CoinToDisplayAtsameTime)
             {
-                coins.Add(CreateCoin(coinDatas[Random.Range(0, coinDatas.Count - 1)]));
+                coins.Add(CreateCoin(coinDatas[Random.Range(0, coinDatas.Count)]));
             }
         }
 
