@@ -37,7 +37,6 @@ namespace Player
     
         private void OnJump(InputAction.CallbackContext context)
         {
-            Debug.Log("Jump");
             rigidbody.AddForce(Vector3.up * data.JumpForce, ForceMode.VelocityChange);
         }
 

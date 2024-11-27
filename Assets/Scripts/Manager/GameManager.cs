@@ -1,4 +1,5 @@
 using Delegate;
+using Object;
 using UnityEngine;
 
 namespace Manager
@@ -10,6 +11,7 @@ namespace Manager
         public static event GameEvent.UnlockingDoor OnUnlockingDoor;
         public static event GameEvent.ModifyPoint OnModifyPoint;
         public int PointToUnlockLevel;
+        public Level level;
 
         private float timer = 0;
         private int point = 0;

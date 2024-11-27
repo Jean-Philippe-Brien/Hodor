@@ -55,9 +55,9 @@ namespace Manager
         private Coin CreateCoin(CoinData data)
         {
             var coin = Instantiate(data.CoinPrefab, coinsContainer).GetComponent<Coin>();
+            var levelLimit = GameManager.Instance.level.GetLevelLimitBounds();
             coin.Initialize(data.CoinValue, data.TakeCoinSound);
-            //Magic Number !!!!!! update after level script
-            coin.transform.position = new Vector3(Random.Range(-10, 10), 1.5f, Random.Range(-10, 10));
+            coin.transform.position = new Vector3(Random.Range(levelLimit.min.x, levelLimit.max.x), 1.5f, Random.Range(levelLimit.min.z, levelLimit.max.z));
 
             return coin;
         }
