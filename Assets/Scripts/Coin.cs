@@ -17,6 +17,7 @@ public class Coin : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         onCoinLoot?.Invoke(this);
+        GameManager.Instance.Point += coinValue;
         Destroy(gameObject);
     }
 }

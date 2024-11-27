@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fe0351179c476548a77aa05998980b9, type: 3}
   m_Name: CoinData
   m_EditorClassIdentifier: 
-  CoinValue: 1
-  TakeCoinSound: {fileID: 0}
+  coinValue: 1
+  takeCoinSound: {fileID: 0}
   coinPrefab: {fileID: 5814508201105648519, guid: d4af886382e2b1747bca3f998999c84a, type: 3}
