@@ -538,8 +538,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0975f12777fa29e469c79e61b0b45563, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CoinToDisplayAtsameTime: 10
   coinsContainer: {fileID: 5028589093747143825}
-  maxCoinDisplay: 10
 --- !u!1 &546657391
 GameObject:
   m_ObjectHideFlags: 0
@@ -1266,7 +1266,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Time: '
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1402,7 +1402,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Point: 3'
+  m_text: 'Points: 0'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1602,9 +1602,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46d5a7ee3a534705806885be2073eebe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MessageText: {fileID: 1122376259}
-  Point: {fileID: 1674366047}
-  Timer: {fileID: 1564257332}
+  messageText: {fileID: 1122376259}
+  point: {fileID: 1674366047}
+  timer: {fileID: 1564257332}
 --- !u!1 &1820223589
 GameObject:
   m_ObjectHideFlags: 0

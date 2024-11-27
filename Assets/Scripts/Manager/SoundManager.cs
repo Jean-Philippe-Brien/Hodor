@@ -22,7 +22,7 @@ namespace Manager
 
             Instance = this;
             audioSource = GetComponent<AudioSource>();
-            soundsList = Resources.Load<SoundData>("ScriptableObject/Sounds/SoundData").GetSoundLists();
+            soundsList = Resources.Load<SoundData>("ScriptableObject/SoundData").GetSoundLists();
         }
 
         public void PlaySoundOneShot(Enum.SoundName soundName)

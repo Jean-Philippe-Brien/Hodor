@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d79bac8d9c46404aa4186a15b0e9ff7c, type: 3}
   m_Name: SoundData
   m_EditorClassIdentifier: 
-  Sounds:
-  - name: 0
+  sounds:
+  - Name: 0
     volume: 1
-    mixer: {fileID: 0}
-    sound: {fileID: 8300000, guid: 7adea6a0237ae1c4d84a1681589305e7, type: 3}
-  - name: 1
+    Mixer: {fileID: 0}
+    AudioClip: {fileID: 8300000, guid: 7adea6a0237ae1c4d84a1681589305e7, type: 3}
+  - Name: 1
     volume: 1
-    mixer: {fileID: 0}
-    sound: {fileID: 0}
+    Mixer: {fileID: 0}
+    AudioClip: {fileID: 0}

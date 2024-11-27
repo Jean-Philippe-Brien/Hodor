@@ -442,6 +442,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2918100876071457759}
   - component: {fileID: 2270629053933481177}
+  - component: {fileID: 5545973601110606304}
   m_Layer: 0
   m_Name: Door
   m_TagString: Untagged
@@ -480,3 +481,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41b5bee2488d5d34d8a8e5aab2e7f5f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!111 &5545973601110606304
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8700592848090180720}
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Animation: {fileID: 0}
+  m_Animations:
+  - {fileID: 7400000, guid: c84cdc1d0780e824382425dd4164a079, type: 2}
+  - {fileID: 7400000, guid: e4580cb5b915ba046a90fc80d783434f, type: 2}
+  - {fileID: 7400000, guid: 99c6ec401909fcc489ffa87ef7f1399c, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_UpdateMode: 0
+  m_CullingType: 0

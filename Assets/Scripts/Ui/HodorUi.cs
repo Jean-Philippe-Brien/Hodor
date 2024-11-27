@@ -1,15 +1,14 @@
 ﻿using Manager;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Object
 {
     public class HodorUi : MonoBehaviour
     {
-         private TextMeshProUGUI messageText;
-         private TextMeshProUGUI point;
-         private TextMeshProUGUI timer;
+         [SerializeField] private TextMeshProUGUI messageText;
+         [SerializeField] private TextMeshProUGUI point;
+         [SerializeField] private TextMeshProUGUI timer;
 
         private void Awake()
         {

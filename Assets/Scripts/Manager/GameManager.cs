@@ -25,7 +25,6 @@ namespace Manager
                 {
                     point = value;
                     OnModifyPoint?.Invoke(point);
-                    Debug.Log(point);
                 }
 
                 if (value >= PointToUnlockLevel)

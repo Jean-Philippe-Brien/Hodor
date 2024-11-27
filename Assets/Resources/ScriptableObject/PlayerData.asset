@@ -50,7 +50,7 @@ MonoBehaviour:
       m_Flags: 8
     - m_Name: left
       m_Id: b586b459-df6d-4dca-897f-02cae9d918b9
-      m_Path: 
+      m_Path: <Keyboard>/a
       m_Interactions: 
       m_Processors: 
       m_Groups: 
@@ -58,7 +58,7 @@ MonoBehaviour:
       m_Flags: 8
     - m_Name: right
       m_Id: 1d925324-74a5-4954-97aa-53ede6fb4338
-      m_Path: 
+      m_Path: <Keyboard>/d
       m_Interactions: 
       m_Processors: 
       m_Groups: 
@@ -72,5 +72,13 @@ MonoBehaviour:
     m_Id: cb554865-b256-4309-b67d-ed5d1b493713
     m_Processors: 
     m_Interactions: 
-    m_SingletonActionBindings: []
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 56df207a-5252-46cf-ae3a-18e50a266bf7
+      m_Path: <Keyboard>/space
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Jump
+      m_Flags: 0
     m_Flags: 0
