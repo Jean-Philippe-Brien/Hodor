@@ -1,16 +1,17 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.Serialization;
 
 namespace Struct
 {
     [Serializable]
     public struct Sound
     {
-        public Enum.SoundName name;
+        [FormerlySerializedAs("name")] public Enum.SoundName Name;
         [Range(0, 1)] public float volume;
-        public AudioMixerGroup mixer;
-        public AudioClip sound;
+        [FormerlySerializedAs("mixer")] public AudioMixerGroup Mixer;
+        [FormerlySerializedAs("sound")] public AudioClip AudioClip;
     }
 }
     

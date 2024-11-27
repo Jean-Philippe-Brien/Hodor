@@ -1,14 +1,15 @@
 ﻿using Manager;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Object
 {
     public class HodorUi : MonoBehaviour
     {
-        public TextMeshProUGUI MessageText;
-        public TextMeshProUGUI Point;
-        public TextMeshProUGUI Timer;
+         private TextMeshProUGUI messageText;
+         private TextMeshProUGUI point;
+         private TextMeshProUGUI timer;
 
         private void Awake()
         {
@@ -18,17 +19,17 @@ namespace Object
 
         private void Update()
         {
-            Timer.text = $"Timer: {GameManager.Instance.Timer}";
+            timer.text = $"Timer: {GameManager.Instance.Timer}";
         }
 
         private void OnUnlockingDoor()
         {
-            MessageText.text = "DOOR UNLOCK";
+            messageText.text = "DOOR UNLOCK";
         }
 
         private void OnPointChanged(int point)
         {
-            Point.text = $"points: {point}";
+            this.point.text = $"points: {point}";
         }
     }
 }

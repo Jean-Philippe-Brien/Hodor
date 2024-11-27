@@ -40,8 +40,7 @@ namespace Object
     
         private void OnStateChange()
         {
-            animationComponent.Play(state.ToString());
-            Debug.Log(state.ToString());
+            animationComponent.Play(State.ToString());
         }
     }
 }

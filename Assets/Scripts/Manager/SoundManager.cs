@@ -27,7 +27,7 @@ namespace Manager
 
         public void PlaySoundOneShot(Enum.SoundName soundName)
         {
-            audioSource.PlayOneShot(soundsList[soundName].sound);
+            audioSource.PlayOneShot(soundsList[soundName].AudioClip);
         }
     }
 }

@@ -7,15 +7,15 @@ namespace ScriptableObjects
     [CreateAssetMenu(fileName = "SoundData", menuName = "ScriptableObject/SoundData")]
     public class SoundData : ScriptableObject
     {
-        [SerializeField] private List<Sound> Sounds;
+        [SerializeField] private List<Sound> sounds;
 
         public Dictionary<Enum.SoundName, Sound> GetSoundLists()
         {
             Dictionary<Enum.SoundName, Sound> soundsList = new Dictionary<Enum.SoundName, Sound>();
         
-            foreach (var sound in Sounds)
+            foreach (var sound in sounds)
             {
-                soundsList.Add(sound.name, sound);
+                soundsList.Add(sound.Name, sound);
             }
 
             return soundsList;

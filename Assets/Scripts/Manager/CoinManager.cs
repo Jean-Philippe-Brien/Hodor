@@ -9,15 +9,15 @@ namespace Manager
 {
     public class CoinManager : MonoBehaviour
     {
-        public Transform coinsContainer;
         public int CoinToDisplayAtsameTime = 3;
     
-        private List<Coin> _coins = new List<Coin>();
-        private List<CoinData> _coinDatas = new List<CoinData>();
+        [SerializeField] private Transform coinsContainer;
+        private List<Coin> coins = new List<Coin>();
+        private List<CoinData> coinDatas = new List<CoinData>();
 
         private void Awake()
         {
-            _coinDatas = Resources.LoadAll<CoinData>("ScriptableObject/coins").ToList();
+            coinDatas = Resources.LoadAll<CoinData>("ScriptableObject/coins").ToList();
         }
 
         private void Start()
@@ -36,19 +36,19 @@ namespace Manager
 
         private void RemoveCoinFromList(Coin coin)
         {
-            if (_coins.Contains(coin))
+            if (coins.Contains(coin))
             {
-                _coins.Remove(coin);
+                coins.Remove(coin);
             }
         }
 
         private void FillCoinList()
         {
-            if(_coinDatas.Count == 0) return;
+            if(coinDatas.Count == 0) return;
         
-            while (_coins.Count < CoinToDisplayAtsameTime)
+            while (coins.Count < CoinToDisplayAtsameTime)
             {
-                _coins.Add(CreateCoin(_coinDatas[Random.Range(0, _coinDatas.Count - 1)]));
+                coins.Add(CreateCoin(coinDatas[Random.Range(0, coinDatas.Count - 1)]));
             }
         }
 
