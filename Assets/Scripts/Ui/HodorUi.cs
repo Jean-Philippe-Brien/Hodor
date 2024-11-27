@@ -1,6 +1,7 @@
 ﻿using Manager;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Object
 {
@@ -9,8 +10,10 @@ namespace Object
          [SerializeField] private TextMeshProUGUI messageText;
          [SerializeField] private TextMeshProUGUI point;
          [SerializeField] private TextMeshProUGUI timer;
+         [SerializeField] private TextMeshProUGUI endMessage;
+         [SerializeField] private Button restartButton;
 
-        private void Awake()
+        private void Start()
         {
             GameManager.OnModifyPoint += OnPointChanged;
             GameManager.OnUnlockingDoor += OnUnlockingDoor;

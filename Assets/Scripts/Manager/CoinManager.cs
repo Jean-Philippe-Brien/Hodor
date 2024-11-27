@@ -23,6 +23,7 @@ namespace Manager
         private void Start()
         {
             Coin.OnCoinCollected += OnCoinCollected;
+            
             FillCoinList();
         }
 
@@ -55,7 +56,7 @@ namespace Manager
         private Coin CreateCoin(CoinData data)
         {
             var coin = Instantiate(data.CoinPrefab, coinsContainer).GetComponent<Coin>();
-            var levelLimit = GameManager.Instance.level.GetLevelLimitBounds();
+            var levelLimit = LevelManager.Instance.ActualLevel.GetLevelLimitBounds();
             coin.Initialize(data.CoinValue, data.TakeCoinSound);
             coin.transform.position = new Vector3(Random.Range(levelLimit.min.x, levelLimit.max.x), 1.5f, Random.Range(levelLimit.min.z, levelLimit.max.z));
 

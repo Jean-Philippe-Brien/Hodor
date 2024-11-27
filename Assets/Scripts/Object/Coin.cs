@@ -6,7 +6,7 @@ namespace Object
 [RequireComponent(typeof(Collider))]
     public class Coin : MonoBehaviour
     {
-        public static event GameEvent.OnCoinLoot OnCoinCollected;
+        public static event GameEvent.CoinLoot OnCoinCollected;
     
         private int coinValue;
         private Enum.SoundName coinCollectedSound;

@@ -1,5 +1,4 @@
 using Delegate;
-using Object;
 using UnityEngine;
 
 namespace Manager
@@ -10,13 +9,13 @@ namespace Manager
     
         public static event GameEvent.UnlockingDoor OnUnlockingDoor;
         public static event GameEvent.ModifyPoint OnModifyPoint;
-        public int PointToUnlockLevel;
-        public Level level;
+        public static event GameEvent.GameStart OnGameStart;
+        
+        public float Timer => timer;
 
         private float timer = 0;
         private int point = 0;
-
-        public float Timer => timer;
+        private bool updateTimer;
 
         public int Point
         {
@@ -29,7 +28,7 @@ namespace Manager
                     OnModifyPoint?.Invoke(point);
                 }
 
-                if (value >= PointToUnlockLevel)
+                if (value >= LevelManager.Instance.ActualLevel.PointToUnlockLevel)
                 {
                     OnUnlockingDoor?.Invoke();
                 }
@@ -46,7 +45,25 @@ namespace Manager
             Instance = this;
         }
 
+        private void Start()
+        {
+            updateTimer = true;
+            LevelManager.OnEndLevel += OnEndLevel;
+            OnGameStart?.Invoke();
+        }
+
+        private void OnEndLevel()
+        {
+            updateTimer = false;
+        }
+
         private void Update()
+        {
+            if(updateTimer)
+                UpdateTimer();
+        }
+
+        private void UpdateTimer()
         {
             timer += Time.deltaTime;
         }

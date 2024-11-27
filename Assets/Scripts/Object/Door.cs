@@ -3,10 +3,9 @@ using UnityEngine;
 
 namespace Object
 {
-    [RequireComponent(typeof(Animation))]
     public class Door : MonoBehaviour
     {
-
+        [SerializeField] private Animation animationComponent;
         private Enum.DoorState state = Enum.DoorState.Idle;
 
         public Enum.DoorState State
@@ -19,13 +18,6 @@ namespace Object
                 state = value;
                 OnStateChange();
             } 
-        }
-
-        private Animation animationComponent;
-
-        private void Awake()
-        {
-            animationComponent = GetComponent<Animation>();
         }
 
         private void Start()
