@@ -1,11 +1,11 @@
 using System.Collections.Generic;
 using System.Linq;
-using Object;
-using ScriptableObjects;
+using Level;
+using Sound;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace Manager
+namespace Coin
 {
     public class CoinManager : MonoBehaviour
     {
@@ -30,7 +30,7 @@ namespace Manager
         private void OnCoinCollected(Coin coin)
         {
             SoundManager.Instance.PlaySoundOneShot(coin.CoinCollectedSound);
-            GameManager.Instance.Point += coin.CoinValue;
+            GameManager.GameManager.Instance.Point += coin.CoinValue;
             RemoveCoinFromList(coin);
             FillCoinList();
         }

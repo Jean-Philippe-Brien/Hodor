@@ -1,21 +1,21 @@
-using Delegate;
+using Sound;
 using UnityEngine;
 
-namespace Object
+namespace Coin
 {
 [RequireComponent(typeof(Collider))]
     public class Coin : MonoBehaviour
     {
-        public static event GameEvent.CoinLoot OnCoinCollected;
+        public static event CoinEvent.CoinLoot OnCoinCollected;
     
         private int coinValue;
-        private Enum.SoundName coinCollectedSound;
+        private SoundEnum.SoundName coinCollectedSound;
 
         public int CoinValue => coinValue;
 
-        public Enum.SoundName CoinCollectedSound => coinCollectedSound;
+        public SoundEnum.SoundName CoinCollectedSound => coinCollectedSound;
 
-        public void Initialize(int coinValue, Enum.SoundName coinCollectedSound)
+        public void Initialize(int coinValue, SoundEnum.SoundName coinCollectedSound)
         {
             this.coinValue = coinValue;
             this.coinCollectedSound = coinCollectedSound;

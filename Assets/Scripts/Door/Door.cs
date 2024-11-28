@@ -1,14 +1,13 @@
-using Manager;
 using UnityEngine;
 
-namespace Object
+namespace Door
 {
     public class Door : MonoBehaviour
     {
         [SerializeField] private Animation animationComponent;
-        private Enum.DoorState state = Enum.DoorState.Idle;
+        private DoorState state = DoorState.Idle;
 
-        public Enum.DoorState State
+        public DoorState State
         {
             get => state;
             set
@@ -22,10 +21,10 @@ namespace Object
 
         private void Start()
         {
-            GameManager.OnUnlockingDoor += () => OnUnlockDoor(Enum.DoorState.DoorOpen);
+            GameManager.GameManager.OnUnlockingDoor += () => OnUnlockDoor(DoorState.DoorOpen);
         }
 
-        private void OnUnlockDoor(Enum.DoorState stateChoose)
+        private void OnUnlockDoor(DoorState stateChoose)
         {
             State = stateChoose;
         }
@@ -34,5 +33,12 @@ namespace Object
         {
             animationComponent.Play(State.ToString());
         }
+    }
+    
+    public enum DoorState
+    {
+        DoorOpen,
+        DoorClose,
+        Idle,
     }
 }

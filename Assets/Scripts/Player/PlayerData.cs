@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace ScriptableObjects
+namespace Player
 {
     [CreateAssetMenu(fileName = "PlayerData", menuName = "ScriptableObject/PlayerData")]
     public class PlayerData : ScriptableObject

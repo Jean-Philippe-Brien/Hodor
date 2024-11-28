@@ -1,8 +1,7 @@
-using Delegate;
-using Struct;
+using Level;
 using UnityEngine;
 
-namespace Manager
+namespace GameManager
 {
     public class GameManager : MonoBehaviour
     {
@@ -62,7 +61,7 @@ namespace Manager
             timer += Time.deltaTime;
         }
         
-        private void OnEndLevel(EndLevelInfo endlevelinfo)
+        private void OnEndLevel(EndLevelInfo endLevelInfo)
         {
             updateTimer = false;
         }

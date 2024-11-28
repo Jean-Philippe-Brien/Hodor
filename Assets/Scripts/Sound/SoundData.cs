@@ -1,17 +1,16 @@
 ﻿using System.Collections.Generic;
-using Struct;
 using UnityEngine;
 
-namespace ScriptableObjects
+namespace Sound
 {
     [CreateAssetMenu(fileName = "SoundData", menuName = "ScriptableObject/SoundData")]
     public class SoundData : ScriptableObject
     {
         [SerializeField] private List<SoundInfo> sounds;
 
-        public Dictionary<Enum.SoundName, SoundInfo> GetSoundLists()
+        public Dictionary<SoundEnum.SoundName, SoundInfo> GetSoundLists()
         {
-            Dictionary<Enum.SoundName, SoundInfo> soundsList = new Dictionary<Enum.SoundName, SoundInfo>();
+            Dictionary<SoundEnum.SoundName, SoundInfo> soundsList = new Dictionary<SoundEnum.SoundName, SoundInfo>();
         
             foreach (var sound in sounds)
             {

@@ -1,4 +1,4 @@
-﻿namespace Struct
+﻿namespace Level
 {
     public struct EndLevelInfo
     {

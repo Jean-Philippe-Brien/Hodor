@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Object
+namespace Level
 {
     public class Level : MonoBehaviour
     {

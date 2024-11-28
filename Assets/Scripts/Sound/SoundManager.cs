@@ -1,9 +1,7 @@
 ﻿using System.Collections.Generic;
-using ScriptableObjects;
-using Struct;
 using UnityEngine;
 
-namespace Manager
+namespace Sound
 {
     [RequireComponent(typeof(AudioSource))]
     public class SoundManager : MonoBehaviour
@@ -11,7 +9,7 @@ namespace Manager
         public static SoundManager Instance;
 
         private AudioSource audioSource;
-        private Dictionary<Enum.SoundName, SoundInfo> soundsList = new Dictionary<Enum.SoundName, SoundInfo>();
+        private Dictionary<SoundEnum.SoundName, SoundInfo> soundsList = new Dictionary<SoundEnum.SoundName, SoundInfo>();
     
         private void Awake()
         {
@@ -25,7 +23,7 @@ namespace Manager
             soundsList = Resources.Load<SoundData>("ScriptableObject/SoundData").GetSoundLists();
         }
 
-        public void PlaySoundOneShot(Enum.SoundName soundName)
+        public void PlaySoundOneShot(SoundEnum.SoundName soundName)
         {
             audioSource.PlayOneShot(soundsList[soundName].AudioClip);
         }
