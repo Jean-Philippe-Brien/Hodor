@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Level;
+using Sound;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -51,6 +52,7 @@ namespace Coin
 
         private void OnCoinCollected(Coin coin)
         {
+            SoundManager.Instance.PlaySoundOneShot(coin.CoinCollectedSound);
             RemoveCoinFromList(coin);
             FillCoinList();
             CoinCollected += coin.CoinValue;

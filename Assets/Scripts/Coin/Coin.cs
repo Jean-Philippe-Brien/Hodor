@@ -15,6 +15,11 @@ namespace Coin
 
         public SoundEnum.SoundName CoinCollectedSound => coinCollectedSound;
 
+        private void Awake()
+        {
+            GetComponent<Collider>().isTrigger = true;
+        }
+
         public void Initialize(int coinValue, SoundEnum.SoundName coinCollectedSound)
         {
             this.coinValue = coinValue;

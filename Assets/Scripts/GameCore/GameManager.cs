@@ -1,6 +1,5 @@
 using Coin;
 using Level;
-using Sound;
 using UnityEngine;
 
 namespace GameCore
@@ -8,15 +7,14 @@ namespace GameCore
     public class GameManager : MonoBehaviour
     {
         public static GameManager Instance;
-    
         public static event GameEvent.UnlockingDoor OnUnlockingDoor;
         public static event LevelEvent.EndLevel OnEndLevel;
-        
-        public float Timer => timer;
 
         private float timer;
         private int point;
         private bool updateTimer;
+        
+        public float Timer => timer;
 
         private void Awake()
         {
@@ -35,15 +33,6 @@ namespace GameCore
             CoinManager.Instance.OnModifyCoinCollected += OnModifyCoinCollected;
         }
 
-        private void OnModifyCoinCollected(int coinCollected)
-        {
-            SoundManager.Instance.PlaySoundOneShot(SoundEnum.SoundName.CollectCoin);
-            
-            if (coinCollected < LevelManager.Instance.ActualLevel.PointToUnlockLevel) return;
-            
-            OnUnlockingDoor?.Invoke();
-        }
-
         private void Update()
         {
             if(updateTimer)
@@ -58,6 +47,13 @@ namespace GameCore
         private void OnExitLevelBoxPass()
         {
             OnEndLevel?.Invoke(new EndLevelInfo(CoinManager.Instance.CoinCollected, timer));
+        }
+        
+        private void OnModifyCoinCollected(int coinCollected)
+        {
+            if (coinCollected < LevelManager.Instance.ActualLevel.PointToUnlockLevel) return;
+            
+            OnUnlockingDoor?.Invoke();
         }
     }
 }

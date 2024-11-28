@@ -3,7 +3,6 @@ using GameCore;
 using Level;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace Ui
@@ -14,7 +13,7 @@ namespace Ui
          [SerializeField] private TextMeshProUGUI pointText;
          [SerializeField] private TextMeshProUGUI timerText;
          [SerializeField] private Transform endScreen;
-         [FormerlySerializedAs("endMessage")] [SerializeField] private TextMeshProUGUI endMessageText;
+         [SerializeField] private TextMeshProUGUI endMessageText;
          [SerializeField] private Button restartButton;
 
         private void Start()
