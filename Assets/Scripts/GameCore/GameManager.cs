@@ -1,5 +1,6 @@
 using Coin;
 using Level;
+using Sound;
 using UnityEngine;
 
 namespace GameCore
@@ -31,11 +32,13 @@ namespace GameCore
         {
             updateTimer = true;
             FinishLevelBox.OnExitLevelBoxPass += OnExitLevelBoxPass;
-            CoinManager.Instance.OnModifyCoinCollected += ModifyPointCollected;
+            CoinManager.Instance.OnModifyCoinCollected += OnModifyCoinCollected;
         }
 
-        private void ModifyPointCollected(int coinCollected)
+        private void OnModifyCoinCollected(int coinCollected)
         {
+            SoundManager.Instance.PlaySoundOneShot(SoundEnum.SoundName.CollectCoin);
+            
             if (coinCollected < LevelManager.Instance.ActualLevel.PointToUnlockLevel) return;
             
             OnUnlockingDoor?.Invoke();

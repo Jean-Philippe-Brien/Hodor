@@ -7,12 +7,15 @@ namespace Player
         public bool isGrounded = true;
         private void OnTriggerEnter(Collider other)
         {
-            isGrounded = true;
+            Debug.Log(other.gameObject.name);
+            if(other.gameObject.layer == LayerMask.NameToLayer("Ground"))
+                isGrounded = true;
         }
 
         private void OnTriggerExit(Collider other)
         {
-            isGrounded = false;
+            if(other.gameObject.layer == LayerMask.NameToLayer("Ground"))
+                isGrounded = false;
         }
     }
 }
