@@ -1847,7 +1847,7 @@ PrefabInstance:
       objectReference: {fileID: 5028589093747143825}
     - target: {fileID: 6642911142654972489, guid: 759675eebbe57d745b495c105cc5fd35, type: 3}
       propertyPath: coinToDisplayAtsameTime
-      value: 100
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8539189653199059758, guid: 759675eebbe57d745b495c105cc5fd35, type: 3}
       propertyPath: ActualLevel

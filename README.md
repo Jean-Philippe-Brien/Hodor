@@ -119,9 +119,14 @@ Add sound
 4-Use mixer  
 5-Use assembly  
 6-Create manager for UI  
+7-create abstract mother class for manager (Include the singleton)   
 
 # Some more feature  
 1- can integrate multiple type of coin (Can add pourcent of chance to get this type)  
 2- End Screen  
 3- Can add more than one level (not complete)  
 4- Can add plenny of sound  
+
+# Assumption
+
+1- Create that like a little game  
