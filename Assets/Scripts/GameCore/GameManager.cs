@@ -36,10 +36,9 @@ namespace GameCore
 
         private void ModifyPointCollected(int coinCollected)
         {
-            if (coinCollected > LevelManager.Instance.ActualLevel.PointToUnlockLevel)
-            {
-                OnUnlockingDoor?.Invoke();
-            }
+            if (coinCollected < LevelManager.Instance.ActualLevel.PointToUnlockLevel) return;
+            
+            OnUnlockingDoor?.Invoke();
         }
 
         private void Update()

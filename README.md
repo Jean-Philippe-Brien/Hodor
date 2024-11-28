@@ -99,11 +99,18 @@ CREATE COINS
 
 Create level  
 &emsp;1- Create a level in editor   
-&emsp;3- Put level script on root of your level  
-&emsp;4- Refer all Dependencie in inspector  
-&emsp;5- Replace the level in LevelManager value with the new level  
+&emsp;2- Put level script on root of your level  
+&emsp;3- Refer all Dependencie in inspector  
+&emsp;4- Replace the level in LevelManager value with the new level  
 
-# optimization idea
+Add sound  
+&emsp;1- Add audio clip in Asset/Audio folder   
+&emsp;2- Put name of audio in soundEnum script   
+&emsp;3- Find SoundData (its a scriptable object Asset/Ressources/ScriptableObject/SoundData)  
+&emsp;4- Add line and fill data
+&emsp;5- Now you can call SoundManager.Instance.PlaySoundOneShot(SoundName (Step 2))    
+
+# Optimization Idea
 1-Create interface for coin  
 2-Make factory for coin  
 3-Modify PlayerData to PlayerMovementData and make a mother abstract class call PlayerMovementData  
@@ -112,3 +119,9 @@ Create level
 4-Use mixer  
 5-Use assembly  
 6-Create manager for UI  
+
+# Some more feature  
+1- can integrate multiple type of coin (Can add pourcent of chance to get this type)  
+2- End Screen  
+3- Can add more than one level (not complete)  
+4- Can add plenny of sound  
