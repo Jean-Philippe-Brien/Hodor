@@ -4,14 +4,14 @@ namespace Level
 {
     public class Level : MonoBehaviour
     {
-        [SerializeField] private Collider LevelLimit;
+        [SerializeField] private Collider levelLimit;
         [SerializeField] private int pointToUnlockLevel;
         
         public int PointToUnlockLevel => pointToUnlockLevel;
 
         public Bounds GetLevelLimitBounds()
         {
-            return LevelLimit.bounds;
+            return levelLimit.bounds;
         }
     }
 }

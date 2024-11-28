@@ -1,3 +1,4 @@
+using GameCore;
 using UnityEngine;
 
 namespace Door
@@ -21,7 +22,8 @@ namespace Door
 
         private void Start()
         {
-            GameManager.GameManager.OnUnlockingDoor += () => OnUnlockDoor(DoorState.DoorOpen);
+            
+            GameManager.OnUnlockingDoor += () => OnUnlockDoor(DoorState.DoorOpen);
         }
 
         private void OnUnlockDoor(DoorState stateChoose)

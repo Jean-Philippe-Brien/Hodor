@@ -9,14 +9,37 @@ namespace Coin
 {
     public class CoinManager : MonoBehaviour
     {
-        public int CoinToDisplayAtsameTime = 3;
-    
+        public static CoinManager Instance;
+        public event CoinEvent.ModifyCoinCollected OnModifyCoinCollected;
+        
+        [SerializeField] private int coinToDisplayAtsameTime = 3;
         [SerializeField] private Transform coinsContainer;
+        [SerializeField] private int coinCollected;
         private List<Coin> coins = new List<Coin>();
         private List<CoinData> coinDatas = new List<CoinData>();
+        
+        public int CoinCollected
+        {
+            get => coinCollected;
+            set
+            {
+                if (value >= 0)
+                {
+                    coinCollected = value;
+                    OnModifyCoinCollected?.Invoke(coinCollected);
+                }
+            }
+        }
 
         private void Awake()
         {
+            if (Instance != null)
+            {
+                Debug.LogError($"{Instance.gameObject.name} conflict with: {gameObject.name} Managers Cannot be duplicated");
+            }
+
+            Instance = this;
+            
             coinDatas = Resources.LoadAll<CoinData>("ScriptableObject/coins").ToList();
         }
 
@@ -30,9 +53,9 @@ namespace Coin
         private void OnCoinCollected(Coin coin)
         {
             SoundManager.Instance.PlaySoundOneShot(coin.CoinCollectedSound);
-            GameManager.GameManager.Instance.Point += coin.CoinValue;
             RemoveCoinFromList(coin);
             FillCoinList();
+            CoinCollected += coin.CoinValue;
         }
 
         private void RemoveCoinFromList(Coin coin)
@@ -47,7 +70,7 @@ namespace Coin
         {
             if(coinDatas.Count == 0) return;
         
-            while (coins.Count < CoinToDisplayAtsameTime)
+            while (coins.Count < coinToDisplayAtsameTime)
             {
                 coins.Add(CreateCoin(coinDatas[Random.Range(0, coinDatas.Count)]));
             }

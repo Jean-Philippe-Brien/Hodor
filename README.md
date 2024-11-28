@@ -109,3 +109,6 @@ Create level
 3-Modify PlayerData to PlayerMovementData and make a mother abstract class call PlayerMovementData  
 &emsp;Add abstract method call GetDirection  
 &emsp;Advantage: can be used by player and a future ia  
+4-Use mixer  
+5-Use assembly  
+6-Create manager for UI  

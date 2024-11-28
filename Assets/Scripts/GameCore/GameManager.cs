@@ -1,38 +1,21 @@
+using Coin;
 using Level;
 using UnityEngine;
 
-namespace GameManager
+namespace GameCore
 {
     public class GameManager : MonoBehaviour
     {
         public static GameManager Instance;
     
         public static event GameEvent.UnlockingDoor OnUnlockingDoor;
-        public static event GameEvent.ModifyPoint OnModifyPoint;
+        public static event LevelEvent.EndLevel OnEndLevel;
         
         public float Timer => timer;
 
-        private float timer = 0;
-        private int point = 0;
+        private float timer;
+        private int point;
         private bool updateTimer;
-
-        public int Point
-        {
-            get => point;
-            set
-            {
-                if (value >= 0)
-                {
-                    point = value;
-                    OnModifyPoint?.Invoke(point);
-                }
-
-                if (value >= LevelManager.Instance.ActualLevel.PointToUnlockLevel)
-                {
-                    OnUnlockingDoor?.Invoke();
-                }
-            }
-        }
 
         private void Awake()
         {
@@ -47,7 +30,16 @@ namespace GameManager
         private void Start()
         {
             updateTimer = true;
-            LevelManager.OnEndLevel += OnEndLevel;
+            FinishLevelBox.OnExitLevelBoxPass += OnExitLevelBoxPass;
+            CoinManager.Instance.OnModifyCoinCollected += ModifyPointCollected;
+        }
+
+        private void ModifyPointCollected(int coinCollected)
+        {
+            if (coinCollected > LevelManager.Instance.ActualLevel.PointToUnlockLevel)
+            {
+                OnUnlockingDoor?.Invoke();
+            }
         }
 
         private void Update()
@@ -61,9 +53,9 @@ namespace GameManager
             timer += Time.deltaTime;
         }
         
-        private void OnEndLevel(EndLevelInfo endLevelInfo)
+        private void OnExitLevelBoxPass()
         {
-            updateTimer = false;
+            OnEndLevel?.Invoke(new EndLevelInfo(CoinManager.Instance.CoinCollected, timer));
         }
     }
 }

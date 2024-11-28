@@ -7,14 +7,14 @@ namespace Player
     public class PlayerMovement : MonoBehaviour
     {
         private PlayerData data;
-        private Rigidbody rigidbody;
+        private Rigidbody rigidbodyComponent;
         [SerializeField] private GroundDetection groundDetection;
 
         private void Awake()
         {
             data = Resources.Load<PlayerData>("ScriptableObject/PlayerData");
             data.JumpAction.performed += OnJump;
-            rigidbody = GetComponent<Rigidbody>();
+            rigidbodyComponent = GetComponent<Rigidbody>();
         }
 
         private void OnEnable()
@@ -39,7 +39,7 @@ namespace Player
         {
             if (!groundDetection.isGrounded) return;
             
-            rigidbody.AddForce(Vector3.up * data.JumpForce, ForceMode.VelocityChange);
+            rigidbodyComponent.AddForce(Vector3.up * data.JumpForce, ForceMode.VelocityChange);
         }
 
         private Vector2 GetDirectionPressed()
@@ -54,16 +54,16 @@ namespace Player
             direction.y = 0;
             direction = direction.normalized;
 
-            if (rigidbody.linearVelocity.magnitude < data.MaxSpeed)
+            if (rigidbodyComponent.linearVelocity.magnitude < data.MaxSpeed)
             {
-                rigidbody.AddForce(direction * data.Acceleration);
+                rigidbodyComponent.AddForce(direction * data.Acceleration);
             }
 
         }
 
         private void ApplyRotation()
         {
-            rigidbody.angularVelocity = Vector3.up * (data.RotationSpeed * GetDirectionPressed().x);
+            rigidbodyComponent.angularVelocity = Vector3.up * (data.RotationSpeed * GetDirectionPressed().x);
         }
     }
 }

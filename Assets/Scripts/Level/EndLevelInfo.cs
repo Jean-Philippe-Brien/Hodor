@@ -2,8 +2,8 @@
 {
     public struct EndLevelInfo
     {
-        public int Point;
-        public float TimeToFinish;
+        public readonly int Point;
+        public readonly float TimeToFinish;
 
         public EndLevelInfo(int point, float timeToFinish)
         {

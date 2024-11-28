@@ -1,4 +1,6 @@
-﻿using Level;
+﻿using Coin;
+using GameCore;
+using Level;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -18,14 +20,14 @@ namespace Ui
         private void Start()
         {
             endScreen.gameObject.SetActive(false);
-            GameManager.GameManager.OnModifyPoint += OnPointChanged;
-            GameManager.GameManager.OnUnlockingDoor += OnUnlockingDoor;
-            LevelManager.OnEndLevel += OnEndLevel;
+            CoinManager.Instance.OnModifyCoinCollected += OnModifyCoinCollected;
+            GameManager.OnUnlockingDoor += OnUnlockingDoor;
+            GameManager.OnEndLevel += OnEndLevel;
         }
 
         private void Update()
         {
-            timerText.text = $"Timer: {GameManager.GameManager.Instance.Timer:F2}";
+            timerText.text = $"Timer: {GameManager.Instance.Timer:F2}";
         }
 
         private void OnUnlockingDoor()
@@ -33,7 +35,7 @@ namespace Ui
             messageText.text = "DOOR UNLOCK";
         }
 
-        private void OnPointChanged(int point)
+        private void OnModifyCoinCollected(int point)
         {
             this.pointText.text = $"points: {point}";
         }
