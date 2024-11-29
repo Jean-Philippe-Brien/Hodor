@@ -1,3 +1,4 @@
+using GameCore;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -10,6 +11,7 @@ namespace Player
         [SerializeField] private PlayerMovementData playerMovementData;
         
         private Rigidbody _rigidbodyComponent;
+        private bool _isGamePaused;
 
         private void Awake()
         {
@@ -31,6 +33,24 @@ namespace Player
             playerMovementData.JumpAction.performed += OnJump;
         }
 
+        private void Start()
+        {
+            GameManager.Instance.OnPauseGame += HandlePauseGame;
+            GameManager.Instance.OnResumeGame += HandleResumeGame;
+        }
+
+        private void HandleResumeGame()
+        {
+            _isGamePaused = false;
+            _rigidbodyComponent.isKinematic = false;
+        }
+
+        private void HandlePauseGame()
+        {
+            _isGamePaused = true;
+            _rigidbodyComponent.isKinematic = true;
+        }
+
         private void OnEnable()
         {
             playerMovementData.DirectionAction.Enable();
@@ -45,13 +65,15 @@ namespace Player
 
         private void FixedUpdate()
         {
+            if(_isGamePaused) return;
+            
             ApplyRotation();
             ApplyLinearMovement();
         }
     
         private void OnJump(InputAction.CallbackContext context)
         {
-            if (!groundDetection.IsGrounded) return;
+            if (!groundDetection.IsGrounded || _isGamePaused) return;
             
             _rigidbodyComponent.AddForce(Vector3.up * playerMovementData.JumpForce, ForceMode.VelocityChange);
         }
@@ -86,6 +108,8 @@ namespace Player
         private void OnDestroy()
         {
             playerMovementData.JumpAction.performed -= OnJump;
+            GameManager.Instance.OnPauseGame -= HandlePauseGame;
+            GameManager.Instance.OnResumeGame -= HandleResumeGame;
         }
     }
 }

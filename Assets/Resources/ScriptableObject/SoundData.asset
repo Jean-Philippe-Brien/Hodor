@@ -13,11 +13,5 @@ MonoBehaviour:
   m_Name: SoundData
   m_EditorClassIdentifier: 
   sounds:
-  - Name: 0
-    volume: 1
-    Mixer: {fileID: 0}
-    AudioClip: {fileID: 8300000, guid: 7adea6a0237ae1c4d84a1681589305e7, type: 3}
-  - Name: 1
-    volume: 1
-    Mixer: {fileID: 0}
-    AudioClip: {fileID: 0}
+  - name: 0
+    audioClip: {fileID: 8300000, guid: 7adea6a0237ae1c4d84a1681589305e7, type: 3}

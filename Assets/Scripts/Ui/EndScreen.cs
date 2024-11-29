@@ -7,12 +7,12 @@ namespace Ui
 {
     public class EndScreen : MonoBehaviour
     {
-        [SerializeField] private TextMeshProUGUI message;
+        [SerializeField] private TMP_Text message;
         [SerializeField] private Button button;
         
         public void Awake()
         {
-            message.text = $"Congrats you complete the level\nTime: {GameManager.Instance.Timer:F2}\nPoint: {GameManager.Instance.Point}";
+            message.text = $"Congrats you completed the level\nTime: {GameManager.Instance.Timer:F2}\nPoint: {GameManager.Instance.Point}";
         }
 
         private void Start()
