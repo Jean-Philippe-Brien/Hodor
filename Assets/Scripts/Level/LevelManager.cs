@@ -1,4 +1,5 @@
-﻿using GameCore;
+﻿using System;
+using GameCore;
 using UnityEngine;
 
 namespace Level
@@ -29,6 +30,18 @@ namespace Level
             }
         }
 
+        private void Update()
+        {
+            if(GameManager.Instance.Timer < actualLevel.MaxTimeToComplete ) return;
+            
+            OnTimeOut();
+        }
+
+        public void OnTimeOut()
+        {
+            OnExitLevel?.Invoke(false);
+        }
+
         public Bounds GetActualLevelBounds()
         {
             if (actualLevel == null)
@@ -38,6 +51,11 @@ namespace Level
             }
             
             return actualLevel.GetLevelLimitBounds();
+        }
+
+        public float GetActualLevelMaxTimeToComplete()
+        {
+            return actualLevel.MaxTimeToComplete;
         }
 
         private void VerifyIfLevelIsCompleted(int point)
@@ -62,7 +80,7 @@ namespace Level
                 Debug.LogWarning("Level is not completed yet, but ExitLevel was invoked.");
             }
             
-            OnExitLevel?.Invoke();
+            OnExitLevel?.Invoke(true);
         }
         
         private void OnModifyPoint(int point)

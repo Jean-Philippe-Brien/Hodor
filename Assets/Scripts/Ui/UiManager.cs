@@ -84,9 +84,10 @@ namespace Ui
             OnChangeScreen(UiScreen.GameScreen);
         }
         
-        private void OnExitLevel()
+        private void OnExitLevel(bool success)
         {
             GameManager.Instance.PauseGame();
+            endScreen.SetMessage(success);
             OnChangeScreen(UiScreen.EndScreen);
         }
 

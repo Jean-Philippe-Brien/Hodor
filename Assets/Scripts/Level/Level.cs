@@ -6,8 +6,10 @@ namespace Level
     {
         [SerializeField] private Collider levelLimit;
         [SerializeField, Min(1)] private int coinToFinishLevel = 10;
+        [SerializeField, Min(1)] private int maxTimeToComplete = 60;
 
         public int CoinToFinishLevel => coinToFinishLevel;
+        public int MaxTimeToComplete => maxTimeToComplete;
 
         private void Awake()
         {

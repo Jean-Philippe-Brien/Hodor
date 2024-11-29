@@ -1,4 +1,5 @@
-﻿using GameCore;
+﻿using System.Globalization;
+using GameCore;
 using Level;
 using TMPro;
 using UnityEngine;
@@ -10,6 +11,7 @@ namespace Ui
         [SerializeField] private TMP_Text messageText;
         [SerializeField] private TMP_Text pointText;
         [SerializeField] private TMP_Text timerText;
+        [SerializeField] private TMP_Text maxTimeText;
 
         private void Start()
         {
@@ -21,6 +23,7 @@ namespace Ui
             if (LevelManager.Instance != null)
             {
                 LevelManager.Instance.OnLevelCompleted += OnLevelCompleted;
+                SetMaxTimeText();
             }
         }
 
@@ -28,7 +31,11 @@ namespace Ui
         {
             timerText.text = $"Timer: {GameManager.Instance.Timer:F2}";
         }
-        
+
+        private void SetMaxTimeText()
+        {
+            maxTimeText.text = LevelManager.Instance.GetActualLevelMaxTimeToComplete().ToString(CultureInfo.InvariantCulture);
+        }
         private void OnLevelCompleted()
         {
             messageText.text = "DOOR UNLOCK";
@@ -36,7 +43,7 @@ namespace Ui
 
         private void OnModifyPoint(int point)
         {
-            pointText.text = $"points: {point}";
+            pointText.text = $"Points: {point}";
         }
 
         private void OnDestroy()
