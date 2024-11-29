@@ -5,7 +5,6 @@ namespace Coin
 [RequireComponent(typeof(Collider))]
     public class Coin : MonoBehaviour
     {
-        public event CoinEvent.Collected OnCollected;
         public CoinInfo CoinInfo { get; private set; }
         
         private void Awake()

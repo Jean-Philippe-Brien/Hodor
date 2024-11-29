@@ -10,28 +10,58 @@ namespace Level
         
         [SerializeField] private Level actualLevel;
 
-        public bool isLevelCompleted { get; private set; }
+        private bool _isLevelCompleted;
 
         private void Start()
         {
-            GameManager.Instance.OnModifyPoint += OnModifyPoint;
+            if (GameManager.Instance != null)
+            {
+                GameManager.Instance.OnModifyPoint += OnModifyPoint;
+            }
+            else
+            {
+                Debug.LogError("GameManager instance is not available. LevelManager cannot track points.");
+            }
+
+            if (actualLevel == null)
+            {
+                Debug.LogError("ActualLevel is not assigned in LevelManager.");
+            }
         }
 
         public Bounds GetActualLevelBounds()
         {
+            if (actualLevel == null)
+            {
+                Debug.LogWarning("ActualLevel is not assigned. Returning default Bounds.");
+                return new Bounds();
+            }
+            
             return actualLevel.GetLevelLimitBounds();
         }
 
         private void VerifyIfLevelIsCompleted(int point)
         {
-            if (point < actualLevel.CoinToFinishLevel || isLevelCompleted) return;
+            if (actualLevel == null)
+            {
+                Debug.LogWarning("Cannot verify level completion. ActualLevel is not assigned.");
+                return;
+            }
 
-            isLevelCompleted = true;
-            OnLevelCompleted?.Invoke();
+            if (point >= actualLevel.CoinToFinishLevel && !_isLevelCompleted)
+            {
+                _isLevelCompleted = true;
+                OnLevelCompleted?.Invoke();
+            }
         }
         
         public void ExitLevel()
         {
+            if (!_isLevelCompleted)
+            {
+                Debug.LogWarning("Level is not completed yet, but ExitLevel was invoked.");
+            }
+            
             OnExitLevel?.Invoke();
         }
         
@@ -42,7 +72,10 @@ namespace Level
 
         private void OnDestroy()
         {
-            GameManager.Instance.OnModifyPoint -= OnModifyPoint;
+            if (GameManager.Instance != null)
+            {
+                GameManager.Instance.OnModifyPoint -= OnModifyPoint;
+            }
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace Level
 {
-    public abstract class LevelEvent
+    public static class LevelEvent
     {
         public delegate void StartLevel();
         public delegate void ExitLevel();

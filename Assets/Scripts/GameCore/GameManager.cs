@@ -7,7 +7,7 @@ namespace GameCore
     {
         public event GameEvent.ModifyPoint OnModifyPoint;
         
-        private bool updateTimer;
+        private bool _updateTimer;
         
         public float Timer { get; private set; }
         public int Point { get; private set; }
@@ -20,12 +20,12 @@ namespace GameCore
         
         private void Start()
         {
-            updateTimer = true;
+            _updateTimer = true;
         }
 
         private void Update()
         {
-            if(updateTimer)
+            if(_updateTimer)
                 UpdateTimer();
         }
 

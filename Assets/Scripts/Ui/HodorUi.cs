@@ -41,9 +41,9 @@ namespace Ui
 
         private void OnDestroy()
         {
-            LevelManager.Instance.OnLevelCompleted += OnLevelCompleted;
-            LevelManager.Instance.OnExitLevel += OnExitLevel;
-            GameManager.Instance.OnModifyPoint += OnModifyPoint;
+            LevelManager.Instance.OnLevelCompleted -= OnLevelCompleted;
+            LevelManager.Instance.OnExitLevel -= OnExitLevel;
+            GameManager.Instance.OnModifyPoint -= OnModifyPoint;
         }
     }
 }

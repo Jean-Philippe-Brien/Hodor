@@ -8,16 +8,24 @@ namespace Sound
     {
         [SerializeField] private List<SoundInfo> sounds;
 
-        public Dictionary<SoundEnum.SoundName, SoundInfo> GetSoundLists()
+        public Dictionary<SoundEnum.SoundName, SoundInfo> GetSoundDictionary()
         {
-            Dictionary<SoundEnum.SoundName, SoundInfo> soundsList = new Dictionary<SoundEnum.SoundName, SoundInfo>();
-        
+            var soundDictionary = new Dictionary<SoundEnum.SoundName, SoundInfo>();
+
             foreach (var sound in sounds)
             {
-                soundsList.Add(sound.Name, sound);
+                if (sound == null)
+                {
+                    Debug.LogWarning("Null SoundInfo found in the list. Skipping...");
+                    continue;
+                }
+
+                if (soundDictionary.TryAdd(sound.name, sound)) continue;
+                
+                Debug.LogWarning($"Duplicate SoundName detected: {sound.name}. Ignoring duplicate entry.");
             }
 
-            return soundsList;
+            return soundDictionary;
         }
     }
 }

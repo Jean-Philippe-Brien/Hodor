@@ -1,31 +1,26 @@
 ﻿using System.Collections.Generic;
+using GameCore;
 using UnityEngine;
 
 namespace Sound
 {
     [RequireComponent(typeof(AudioSource))]
-    public class SoundManager : MonoBehaviour
+    public class SoundManager : BaseManager<SoundManager>
     {
-        public static SoundManager Instance;
-
-        private AudioSource audioSource;
-        private Dictionary<SoundEnum.SoundName, SoundInfo> soundsList = new Dictionary<SoundEnum.SoundName, SoundInfo>();
+        private AudioSource _audioSource;
+        private Dictionary<SoundEnum.SoundName, SoundInfo> _soundsList = new Dictionary<SoundEnum.SoundName, SoundInfo>();
     
-        private void Awake()
+        protected override void Awake()
         {
-            if (Instance != null)
-            {
-                Debug.LogError($"{Instance.gameObject.name} conflict with: {gameObject.name} Managers Cannot be duplicated");
-            }
-
-            Instance = this;
-            audioSource = GetComponent<AudioSource>();
-            soundsList = Resources.Load<SoundData>("ScriptableObject/SoundData").GetSoundLists();
+            base.Awake();
+            
+            _audioSource = GetComponent<AudioSource>();
+            _soundsList = Resources.Load<SoundData>("ScriptableObject/SoundData").GetSoundDictionary();
         }
 
         public void PlaySoundOneShot(SoundEnum.SoundName soundName)
         {
-            audioSource.PlayOneShot(soundsList[soundName].AudioClip);
+            _audioSource.PlayOneShot(_soundsList[soundName].audioClip);
         }
     }
 }

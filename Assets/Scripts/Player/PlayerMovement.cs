@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -10,12 +9,26 @@ namespace Player
         [SerializeField] private GroundDetection groundDetection;
         [SerializeField] private PlayerMovementData playerMovementData;
         
-        private Rigidbody rigidbodyComponent;
+        private Rigidbody _rigidbodyComponent;
 
         private void Awake()
         {
+            if (playerMovementData == null)
+            {
+                Debug.LogError("PlayerMovementData is not assigned!", this);
+                enabled = false;
+                return;
+            }
+            
+            if (groundDetection == null)
+            {
+                Debug.LogError("GroundDetection is not assigned!", this);
+                enabled = false;
+                return;
+            }
+            
+            _rigidbodyComponent = GetComponent<Rigidbody>();
             playerMovementData.JumpAction.performed += OnJump;
-            rigidbodyComponent = GetComponent<Rigidbody>();
         }
 
         private void OnEnable()
@@ -38,9 +51,9 @@ namespace Player
     
         private void OnJump(InputAction.CallbackContext context)
         {
-            if (!groundDetection.isGrounded) return;
+            if (!groundDetection.IsGrounded) return;
             
-            rigidbodyComponent.AddForce(Vector3.up * playerMovementData.JumpForce, ForceMode.VelocityChange);
+            _rigidbodyComponent.AddForce(Vector3.up * playerMovementData.JumpForce, ForceMode.VelocityChange);
         }
 
         private Vector2 GetDirectionPressed()
@@ -50,21 +63,24 @@ namespace Player
 
         private void ApplyLinearMovement()
         {
-            var direction = transform.forward * GetDirectionPressed().y;
+            var inputDirection = GetDirectionPressed().y;
+            var moveDirection = transform.forward * inputDirection;
         
-            direction.y = 0;
-            direction = direction.normalized;
+            moveDirection.y = 0;
+            moveDirection = moveDirection.normalized;
 
-            if (rigidbodyComponent.linearVelocity.magnitude < playerMovementData.MaxSpeed)
+            if (_rigidbodyComponent.linearVelocity.magnitude < playerMovementData.MaxSpeed)
             {
-                rigidbodyComponent.AddForce(direction * playerMovementData.Acceleration);
+                _rigidbodyComponent.AddForce(moveDirection * playerMovementData.Acceleration);
             }
 
         }
 
         private void ApplyRotation()
         {
-            rigidbodyComponent.angularVelocity = Vector3.up * (playerMovementData.RotationSpeed * GetDirectionPressed().x);
+            var inputRotation = GetDirectionPressed().x;
+            
+            _rigidbodyComponent.angularVelocity = Vector3.up * (playerMovementData.RotationSpeed * inputRotation);
         }
 
         private void OnDestroy()

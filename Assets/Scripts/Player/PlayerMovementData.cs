@@ -6,10 +6,10 @@ namespace Player
     [CreateAssetMenu(fileName = "PlayerData", menuName = "ScriptableObject/PlayerData")]
     public class PlayerMovementData : ScriptableObject
     {
-        [SerializeField]private float maxSpeed;
-        [SerializeField]private float acceleration;
-        [SerializeField]private float rotationSpeed;
-        [SerializeField]private float jumpForce;
+        [SerializeField]private float maxSpeed = 5f;
+        [SerializeField]private float acceleration = 10f;
+        [SerializeField]private float rotationSpeed = 5f;
+        [SerializeField]private float jumpForce = 7f;
         [SerializeField]private InputAction directionAction;
         [SerializeField]private InputAction jumpAction;
 
