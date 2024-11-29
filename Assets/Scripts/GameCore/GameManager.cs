@@ -14,11 +14,7 @@ namespace GameCore
         public float Timer { get; private set; }
         public int Point { get; private set; }
 
-        public void AddPoint(int point)
-        {
-            Point += point;
-            OnModifyPoint?.Invoke(Point);
-        }
+        public bool IsGamePause => _isGamePause;
 
         private void Update()
         {
@@ -35,17 +31,11 @@ namespace GameCore
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
-
-        public bool TogglePauseGame()
+        
+        public void AddPoint(int point)
         {
-            _isGamePause = !_isGamePause;
-            
-            if(_isGamePause)
-                PauseGame();
-            else
-                ResumeGame();
-
-            return _isGamePause;
+            Point += point;
+            OnModifyPoint?.Invoke(Point);
         }
 
         public void PauseGame()

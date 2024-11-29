@@ -35,8 +35,15 @@ namespace Player
 
         private void Start()
         {
-            GameManager.Instance.OnPauseGame += HandlePauseGame;
-            GameManager.Instance.OnResumeGame += HandleResumeGame;
+            if (GameManager.Instance != null)
+            {
+                GameManager.Instance.OnPauseGame += HandlePauseGame;
+                GameManager.Instance.OnResumeGame += HandleResumeGame;
+            }
+            else
+            {
+                Debug.LogError("GameManager instance is not available. Pause and resume functionality will not work.", this);
+            }
         }
 
         private void HandleResumeGame()
@@ -95,21 +102,28 @@ namespace Player
             {
                 _rigidbodyComponent.AddForce(moveDirection * playerMovementData.Acceleration);
             }
-
         }
 
         private void ApplyRotation()
         {
             var inputRotation = GetDirectionPressed().x;
             
-            _rigidbodyComponent.angularVelocity = Vector3.up * (playerMovementData.RotationSpeed * inputRotation);
+            Vector3 torque = Vector3.up * (inputRotation * playerMovementData.RotationSpeed);
+            _rigidbodyComponent.AddTorque(torque, ForceMode.Acceleration);
         }
 
         private void OnDestroy()
         {
-            playerMovementData.JumpAction.performed -= OnJump;
-            GameManager.Instance.OnPauseGame -= HandlePauseGame;
-            GameManager.Instance.OnResumeGame -= HandleResumeGame;
+            if (playerMovementData != null)
+            {
+                playerMovementData.JumpAction.performed -= OnJump;
+            }
+
+            if (GameManager.Instance != null)
+            {
+                GameManager.Instance.OnPauseGame -= HandlePauseGame;
+                GameManager.Instance.OnResumeGame -= HandleResumeGame;
+            }
         }
     }
 }

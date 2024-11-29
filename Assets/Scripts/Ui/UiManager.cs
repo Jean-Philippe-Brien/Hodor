@@ -53,8 +53,8 @@ namespace Ui
         private void HandlePauseGameCommand(InputAction.CallbackContext obj)
         {
             if (GameManager.Instance == null) return;
-            
-            var isGamePaused = GameManager.Instance.TogglePauseGame();
+
+            var isGamePaused = !GameManager.Instance.IsGamePause;
 
             if(isGamePaused)
                 OnPauseGame();
@@ -74,16 +74,19 @@ namespace Ui
 
         private void OnPauseGame()
         {
+            GameManager.Instance.PauseGame();
             OnChangeScreen(UiScreen.PauseScreen);
         }
 
         private void OnResumeGame()
         {
+            GameManager.Instance.ResumeGame();
             OnChangeScreen(UiScreen.GameScreen);
         }
         
         private void OnExitLevel()
         {
+            GameManager.Instance.PauseGame();
             OnChangeScreen(UiScreen.EndScreen);
         }
 
