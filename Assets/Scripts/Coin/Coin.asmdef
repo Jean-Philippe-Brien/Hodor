@@ -2,6 +2,7 @@
     "name": "Coin",
     "rootNamespace": "",
     "references": [
+        "GUID:0a60fe921faa61b4988fb4f76cabb1a3",
         "GUID:5743769020980d74a90726b86f58c766",
         "GUID:1a79d5cab1e3e674c946806cae163463"
     ],

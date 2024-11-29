@@ -3,7 +3,7 @@
     public abstract class LevelEvent
     {
         public delegate void StartLevel();
-        public delegate void EndLevel(EndLevelInfo endLevelInfo);
-        public delegate void ExitLevelBoxPass();
+        public delegate void ExitLevel();
+        public delegate void LevelCompleted();
     }
 }

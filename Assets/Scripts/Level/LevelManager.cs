@@ -1,20 +1,48 @@
-﻿using UnityEngine;
+﻿using GameCore;
+using UnityEngine;
 
 namespace Level
 {
-    public class LevelManager : MonoBehaviour
+    public class LevelManager : BaseManager<LevelManager>
     {
-        public static LevelManager Instance;
-        public Level ActualLevel;
+        public event LevelEvent.LevelCompleted OnLevelCompleted;
+        public event LevelEvent.ExitLevel OnExitLevel;
         
-        private void Awake()
-        {
-            if (Instance != null)
-            {
-                Debug.LogError($"{Instance.gameObject.name} conflict with: {gameObject.name} Managers Cannot be duplicated");
-            }
+        [SerializeField] private Level actualLevel;
 
-            Instance = this;
+        public bool isLevelCompleted { get; private set; }
+
+        private void Start()
+        {
+            GameManager.Instance.OnModifyPoint += OnModifyPoint;
+        }
+
+        public Bounds GetActualLevelBounds()
+        {
+            return actualLevel.GetLevelLimitBounds();
+        }
+
+        private void VerifyIfLevelIsCompleted(int point)
+        {
+            if (point < actualLevel.CoinToFinishLevel || isLevelCompleted) return;
+
+            isLevelCompleted = true;
+            OnLevelCompleted?.Invoke();
+        }
+        
+        public void ExitLevel()
+        {
+            OnExitLevel?.Invoke();
+        }
+        
+        private void OnModifyPoint(int point)
+        {
+            VerifyIfLevelIsCompleted(point);
+        }
+
+        private void OnDestroy()
+        {
+            GameManager.Instance.OnModifyPoint -= OnModifyPoint;
         }
     }
 }

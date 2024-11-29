@@ -1,8 +1,7 @@
-namespace Coin
+﻿namespace Coin
 {
-    public abstract class CoinEvent
+    public static class CoinEvent
     {
-        public delegate void CoinLoot(Coin coin);
-        public delegate void ModifyCoinCollected(int point);
+        public delegate void Collected(Coin coin);
     }
 }

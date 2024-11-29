@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -6,27 +7,27 @@ namespace Player
     [RequireComponent(typeof(Rigidbody))]
     public class PlayerMovement : MonoBehaviour
     {
-        private PlayerData data;
-        private Rigidbody rigidbodyComponent;
         [SerializeField] private GroundDetection groundDetection;
+        [SerializeField] private PlayerMovementData playerMovementData;
+        
+        private Rigidbody rigidbodyComponent;
 
         private void Awake()
         {
-            data = Resources.Load<PlayerData>("ScriptableObject/PlayerData");
-            data.JumpAction.performed += OnJump;
+            playerMovementData.JumpAction.performed += OnJump;
             rigidbodyComponent = GetComponent<Rigidbody>();
         }
 
         private void OnEnable()
         {
-            data.DirectionAction.Enable();
-            data.JumpAction.Enable();
+            playerMovementData.DirectionAction.Enable();
+            playerMovementData.JumpAction.Enable();
         }
 
         private void OnDisable()
         {
-            data.DirectionAction.Disable();
-            data.JumpAction.Disable();
+            playerMovementData.DirectionAction.Disable();
+            playerMovementData.JumpAction.Disable();
         }
 
         private void FixedUpdate()
@@ -39,12 +40,12 @@ namespace Player
         {
             if (!groundDetection.isGrounded) return;
             
-            rigidbodyComponent.AddForce(Vector3.up * data.JumpForce, ForceMode.VelocityChange);
+            rigidbodyComponent.AddForce(Vector3.up * playerMovementData.JumpForce, ForceMode.VelocityChange);
         }
 
         private Vector2 GetDirectionPressed()
         {
-            return data.DirectionAction.ReadValue<Vector2>();
+            return playerMovementData.DirectionAction.ReadValue<Vector2>();
         }
 
         private void ApplyLinearMovement()
@@ -54,16 +55,21 @@ namespace Player
             direction.y = 0;
             direction = direction.normalized;
 
-            if (rigidbodyComponent.linearVelocity.magnitude < data.MaxSpeed)
+            if (rigidbodyComponent.linearVelocity.magnitude < playerMovementData.MaxSpeed)
             {
-                rigidbodyComponent.AddForce(direction * data.Acceleration);
+                rigidbodyComponent.AddForce(direction * playerMovementData.Acceleration);
             }
 
         }
 
         private void ApplyRotation()
         {
-            rigidbodyComponent.angularVelocity = Vector3.up * (data.RotationSpeed * GetDirectionPressed().x);
+            rigidbodyComponent.angularVelocity = Vector3.up * (playerMovementData.RotationSpeed * GetDirectionPressed().x);
+        }
+
+        private void OnDestroy()
+        {
+            playerMovementData.JumpAction.performed -= OnJump;
         }
     }
 }

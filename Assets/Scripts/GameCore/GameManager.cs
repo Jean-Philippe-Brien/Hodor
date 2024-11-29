@@ -1,36 +1,26 @@
-using Coin;
-using Level;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace GameCore
 {
-    public class GameManager : MonoBehaviour
+    public class GameManager : BaseManager<GameManager>
     {
-        public static GameManager Instance;
-        public static event GameEvent.UnlockingDoor OnUnlockingDoor;
-        public static event LevelEvent.EndLevel OnEndLevel;
-
-        private float timer;
-        private int point;
+        public event GameEvent.ModifyPoint OnModifyPoint;
+        
         private bool updateTimer;
         
-        public float Timer => timer;
+        public float Timer { get; private set; }
+        public int Point { get; private set; }
 
-        private void Awake()
+        public void AddPoint(int point)
         {
-            if (Instance != null)
-            {
-                Debug.LogError($"{Instance.gameObject.name} conflict with: {gameObject.name} Managers Cannot be duplicated");
-            }
-
-            Instance = this;
+            Point += point;
+            OnModifyPoint?.Invoke(Point);
         }
-
+        
         private void Start()
         {
             updateTimer = true;
-            FinishLevelBox.OnExitLevelBoxPass += OnExitLevelBoxPass;
-            CoinManager.Instance.OnModifyCoinCollected += OnModifyCoinCollected;
         }
 
         private void Update()
@@ -41,19 +31,12 @@ namespace GameCore
 
         private void UpdateTimer()
         {
-            timer += Time.deltaTime;
+            Timer += Time.deltaTime;
         }
-        
-        private void OnExitLevelBoxPass()
+
+        public void RestartScene()
         {
-            OnEndLevel?.Invoke(new EndLevelInfo(CoinManager.Instance.CoinCollected, timer));
-        }
-        
-        private void OnModifyCoinCollected(int coinCollected)
-        {
-            if (coinCollected < LevelManager.Instance.ActualLevel.PointToUnlockLevel) return;
-            
-            OnUnlockingDoor?.Invoke();
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
 }

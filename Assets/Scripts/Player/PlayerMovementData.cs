@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 namespace Player
 {
     [CreateAssetMenu(fileName = "PlayerData", menuName = "ScriptableObject/PlayerData")]
-    public class PlayerData : ScriptableObject
+    public class PlayerMovementData : ScriptableObject
     {
         [SerializeField]private float maxSpeed;
         [SerializeField]private float acceleration;

@@ -405,6 +405,7 @@ GameObject:
   - component: {fileID: 553304511}
   - component: {fileID: 553304513}
   - component: {fileID: 553304512}
+  - component: {fileID: 553304514}
   m_Layer: 5
   m_Name: EndScreen
   m_TagString: Untagged
@@ -471,6 +472,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 553304510}
   m_CullTransparentMesh: 1
+--- !u!114 &553304514
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 553304510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fc16ae47113c8b408e0b460b5a76646, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  message: {fileID: 929879786}
+  button: {fileID: 1528047882}
 --- !u!1 &618371912
 GameObject:
   m_ObjectHideFlags: 0
@@ -1119,7 +1134,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1528047881
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1617,9 +1632,7 @@ MonoBehaviour:
   messageText: {fileID: 1122376259}
   pointText: {fileID: 1674366047}
   timerText: {fileID: 1564257332}
-  endScreen: {fileID: 553304511}
-  endMessageText: {fileID: 929879786}
-  restartButton: {fileID: 1528047882}
+  endScreen: {fileID: 553304514}
 --- !u!1 &1852986938
 GameObject:
   m_ObjectHideFlags: 0
@@ -1839,18 +1852,38 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6623595627790194384, guid: 759675eebbe57d745b495c105cc5fd35, type: 3}
       propertyPath: m_Name
-      value: Manager
+      value: Managers
       objectReference: {fileID: 0}
+    - target: {fileID: 6642911142654972489, guid: 759675eebbe57d745b495c105cc5fd35, type: 3}
+      propertyPath: coinsData
+      value: 
+      objectReference: {fileID: 11400000, guid: f597f30d38617e347a9b49e8a1b5155c, type: 2}
     - target: {fileID: 6642911142654972489, guid: 759675eebbe57d745b495c105cc5fd35, type: 3}
       propertyPath: coinsContainer
       value: 
       objectReference: {fileID: 5028589093747143825}
+    - target: {fileID: 6642911142654972489, guid: 759675eebbe57d745b495c105cc5fd35, type: 3}
+      propertyPath: coinDatas.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6642911142654972489, guid: 759675eebbe57d745b495c105cc5fd35, type: 3}
+      propertyPath: 'coinDatas.Array.data[0]'
+      value: 
+      objectReference: {fileID: 11400000, guid: f597f30d38617e347a9b49e8a1b5155c, type: 2}
+    - target: {fileID: 6642911142654972489, guid: 759675eebbe57d745b495c105cc5fd35, type: 3}
+      propertyPath: 'coinDatas.Array.data[1]'
+      value: 
+      objectReference: {fileID: 11400000, guid: e59eec7749e4e73468bed26c3b64ca37, type: 2}
     - target: {fileID: 6642911142654972489, guid: 759675eebbe57d745b495c105cc5fd35, type: 3}
       propertyPath: coinToDisplayAtsameTime
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8539189653199059758, guid: 759675eebbe57d745b495c105cc5fd35, type: 3}
       propertyPath: ActualLevel
+      value: 
+      objectReference: {fileID: 347752027}
+    - target: {fileID: 8539189653199059758, guid: 759675eebbe57d745b495c105cc5fd35, type: 3}
+      propertyPath: actualLevel
       value: 
       objectReference: {fileID: 347752027}
     m_RemovedComponents: []
@@ -1969,6 +2002,10 @@ PrefabInstance:
       propertyPath: m_Size.z
       value: 30
       objectReference: {fileID: 0}
+    - target: {fileID: 4289803496570882313, guid: 7c57702b94a001744b9c7b4c5aad58f0, type: 3}
+      propertyPath: m_Name
+      value: Panel
+      objectReference: {fileID: 0}
     - target: {fileID: 4336781399077837597, guid: 7c57702b94a001744b9c7b4c5aad58f0, type: 3}
       propertyPath: m_Name
       value: Level1
@@ -2025,6 +2062,10 @@ PrefabInstance:
       propertyPath: levelLimit
       value: 
       objectReference: {fileID: 1000098289}
+    - target: {fileID: 7114917401879748699, guid: 7c57702b94a001744b9c7b4c5aad58f0, type: 3}
+      propertyPath: coinToFinishLevel
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7274281942247662786, guid: 7c57702b94a001744b9c7b4c5aad58f0, type: 3}
       propertyPath: m_Layer
       value: 6
@@ -2049,6 +2090,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 6492570496529698037, guid: 2b77291eec5904146a2464df15a67c85, type: 3}
+      propertyPath: playerMovementData
+      value: 
+      objectReference: {fileID: 11400000, guid: b92fcfcfaee186a449c56323a688e6aa, type: 2}
     - target: {fileID: 7860556158681761784, guid: 2b77291eec5904146a2464df15a67c85, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

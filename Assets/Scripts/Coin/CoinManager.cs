@@ -1,86 +1,72 @@
 using System.Collections.Generic;
-using System.Linq;
+using GameCore;
 using Level;
 using Sound;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 namespace Coin
 {
-    public class CoinManager : MonoBehaviour
+    public class CoinManager : BaseManager<CoinManager>
     {
-        public static CoinManager Instance;
-        public event CoinEvent.ModifyCoinCollected OnModifyCoinCollected;
-        
-        [SerializeField] private int coinToDisplayAtsameTime = 3;
+        [SerializeField, Min(0)] private int coinToDisplayAtSameTime = 3;
         [SerializeField] private Transform coinsContainer;
-        [SerializeField] private int coinCollected;
-        private List<Coin> coins = new List<Coin>();
-        private List<CoinData> coinDatas = new List<CoinData>();
+        [SerializeField] private CoinsData coinsData;
         
-        public int CoinCollected
-        {
-            get => coinCollected;
-            set
-            {
-                if (value >= 0)
-                {
-                    coinCollected = value;
-                    OnModifyCoinCollected?.Invoke(coinCollected);
-                }
-            }
-        }
-
-        private void Awake()
-        {
-            if (Instance != null)
-            {
-                Debug.LogError($"{Instance.gameObject.name} conflict with: {gameObject.name} Managers Cannot be duplicated");
-            }
-
-            Instance = this;
-            
-            coinDatas = Resources.LoadAll<CoinData>("ScriptableObject/coins").ToList();
-        }
+        private readonly List<Coin> _coins = new List<Coin>();
 
         private void Start()
         {
-            Coin.OnCoinCollected += OnCoinCollected;
+            if (coinsData == null || coinsContainer == null)
+            {
+                Debug.LogError("CoinsData or CoinsContainer is not assigned!");
+                return;
+            }
             
             FillCoinList();
         }
 
-        private void OnCoinCollected(Coin coin)
+        public void OnCoinCollected(Coin coin)
         {
-            SoundManager.Instance.PlaySoundOneShot(coin.CoinCollectedSound);
+            GameManager.Instance.AddPoint(coin.CoinInfo.CoinValue);
+            SoundManager.Instance.PlaySoundOneShot(coin.CoinInfo.TakeCoinSound);
+            
             RemoveCoinFromList(coin);
             FillCoinList();
-            CoinCollected += coin.CoinValue;
         }
 
         private void RemoveCoinFromList(Coin coin)
         {
-            if (coins.Contains(coin))
-            {
-                coins.Remove(coin);
-            }
+            if (!_coins.Contains(coin)) return;
+            
+            _coins.Remove(coin);
         }
 
         private void FillCoinList()
         {
-            if(coinDatas.Count == 0) return;
+            if(coinsData.coins.Count == 0) return;
         
-            while (coins.Count < coinToDisplayAtsameTime)
+            while (_coins.Count < coinToDisplayAtSameTime)
             {
-                coins.Add(CreateCoin(coinDatas[Random.Range(0, coinDatas.Count)]));
+                Coin coin = CreateCoin(coinsData.coins[Random.Range(0, coinsData.coins.Count)]);
+                
+                if(coin == null) continue;
+                
+                _coins.Add(coin);
             }
         }
 
-        private Coin CreateCoin(CoinData data)
+        private Coin CreateCoin(CoinInfo coinInfo)
         {
-            var coin = Instantiate(data.CoinPrefab, coinsContainer).GetComponent<Coin>();
-            var levelLimit = LevelManager.Instance.ActualLevel.GetLevelLimitBounds();
-            coin.Initialize(data.CoinValue, data.TakeCoinSound);
+            if (coinInfo.CoinPrefab == null)
+            {
+                Debug.LogWarning("CoinInfo or CoinPrefab is missing!");
+                return null;
+            }
+            
+            Coin coin = Instantiate(coinInfo.CoinPrefab, coinsContainer).GetComponent<Coin>();
+            Bounds levelLimit = LevelManager.Instance.GetActualLevelBounds();
+            
+            coin.Initialize(coinInfo);
             coin.transform.position = new Vector3(Random.Range(levelLimit.min.x, levelLimit.max.x), 1.5f, Random.Range(levelLimit.min.z, levelLimit.max.z));
 
             return coin;

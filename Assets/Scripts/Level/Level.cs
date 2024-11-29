@@ -5,9 +5,9 @@ namespace Level
     public class Level : MonoBehaviour
     {
         [SerializeField] private Collider levelLimit;
-        [SerializeField] private int pointToUnlockLevel;
+        [SerializeField, Min(1)] private int coinToFinishLevel;
         
-        public int PointToUnlockLevel => pointToUnlockLevel;
+        public int CoinToFinishLevel => coinToFinishLevel;
 
         public Bounds GetLevelLimitBounds()
         {

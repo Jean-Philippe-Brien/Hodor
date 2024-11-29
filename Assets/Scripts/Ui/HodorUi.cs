@@ -1,9 +1,7 @@
-﻿using Coin;
-using GameCore;
+﻿using GameCore;
 using Level;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Ui
 {
@@ -12,16 +10,13 @@ namespace Ui
          [SerializeField] private TextMeshProUGUI messageText;
          [SerializeField] private TextMeshProUGUI pointText;
          [SerializeField] private TextMeshProUGUI timerText;
-         [SerializeField] private Transform endScreen;
-         [SerializeField] private TextMeshProUGUI endMessageText;
-         [SerializeField] private Button restartButton;
+         [SerializeField] private EndScreen endScreen;
 
         private void Start()
         {
-            endScreen.gameObject.SetActive(false);
-            CoinManager.Instance.OnModifyCoinCollected += OnModifyCoinCollected;
-            GameManager.OnUnlockingDoor += OnUnlockingDoor;
-            GameManager.OnEndLevel += OnEndLevel;
+            LevelManager.Instance.OnLevelCompleted += OnLevelCompleted;
+            LevelManager.Instance.OnExitLevel += OnExitLevel;
+            GameManager.Instance.OnModifyPoint += OnModifyPoint;
         }
 
         private void Update()
@@ -29,20 +24,26 @@ namespace Ui
             timerText.text = $"Timer: {GameManager.Instance.Timer:F2}";
         }
 
-        private void OnUnlockingDoor()
+        private void OnLevelCompleted()
         {
             messageText.text = "DOOR UNLOCK";
         }
 
-        private void OnModifyCoinCollected(int point)
+        private void OnModifyPoint(int point)
         {
-            this.pointText.text = $"points: {point}";
+            pointText.text = $"points: {point}";
         }
         
-        private void OnEndLevel(EndLevelInfo endLevelInfo)
+        private void OnExitLevel()
         {
-            endMessageText.text = $"Congrats you complete the level\\n\nTime: {endLevelInfo.TimeToFinish:F2}\\n \nPoint: {endLevelInfo.Point}"; 
             endScreen.gameObject.SetActive(true);
+        }
+
+        private void OnDestroy()
+        {
+            LevelManager.Instance.OnLevelCompleted += OnLevelCompleted;
+            LevelManager.Instance.OnExitLevel += OnExitLevel;
+            GameManager.Instance.OnModifyPoint += OnModifyPoint;
         }
     }
 }
