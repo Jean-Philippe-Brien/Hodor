@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -40,6 +41,7 @@ namespace GameCore
             if (IsGamePause) return;
             
             IsGamePause = true;
+            Time.timeScale = 0;
             OnPauseGame?.Invoke();
         }
 
@@ -48,6 +50,7 @@ namespace GameCore
             if (!IsGamePause) return;
             
             IsGamePause = false;
+            Time.timeScale = 1;
             OnResumeGame?.Invoke();
         }
 
@@ -55,6 +58,11 @@ namespace GameCore
         {
             Debug.Log("Quitting the game...");
             Application.Quit();
+        }
+
+        private void OnDestroy()
+        {
+            Time.timeScale = 1;
         }
     }
 }

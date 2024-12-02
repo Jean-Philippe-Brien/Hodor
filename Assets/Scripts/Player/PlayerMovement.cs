@@ -46,18 +46,6 @@ namespace Player
             }
         }
 
-        private void HandleResumeGame()
-        {
-            _isGamePaused = false;
-            _rigidbodyComponent.isKinematic = false;
-        }
-
-        private void HandlePauseGame()
-        {
-            _isGamePaused = true;
-            _rigidbodyComponent.isKinematic = true;
-        }
-
         private void OnEnable()
         {
             playerMovementData.DirectionAction.Enable();
@@ -76,6 +64,16 @@ namespace Player
             
             ApplyRotation();
             ApplyLinearMovement();
+        }
+        
+        private void HandleResumeGame()
+        {
+            _isGamePaused = false;
+        }
+
+        private void HandlePauseGame()
+        {
+            _isGamePaused = true;
         }
     
         private void OnJump(InputAction.CallbackContext context)
