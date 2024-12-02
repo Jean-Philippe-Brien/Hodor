@@ -11,7 +11,7 @@ namespace Level.LevelObjects
         {
             if (LevelManager.Instance != null)
             {
-                LevelManager.Instance.OnLevelCompleted += OnLevelCompleted;
+                LevelManager.Instance.OnLevelCompleted += HandleLevelCompleted;
             }
             else
             {
@@ -19,7 +19,7 @@ namespace Level.LevelObjects
             }
         }
 
-        private void OnLevelCompleted()
+        private void HandleLevelCompleted()
         {
             _state = DoorState.DoorOpen;
 
@@ -37,7 +37,7 @@ namespace Level.LevelObjects
         {
             if (LevelManager.Instance != null)
             {
-                LevelManager.Instance.OnLevelCompleted -= OnLevelCompleted;
+                LevelManager.Instance.OnLevelCompleted -= HandleLevelCompleted;
             }
         }
     }

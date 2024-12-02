@@ -29,7 +29,7 @@ namespace Ui
                 Debug.LogError("Restart Button is not assigned in PauseScreen.");
 
             if (quitButton != null)
-                quitButton.onClick.AddListener(QuitGame);
+                quitButton.onClick.AddListener(GameManager.Instance.QuitGame);
             else
                 Debug.LogError("Quit Button is not assigned in PauseScreen.");
         }
@@ -43,12 +43,8 @@ namespace Ui
                 restartButton.onClick.RemoveListener(GameManager.Instance.RestartScene);
 
             if (quitButton != null)
-                quitButton.onClick.RemoveListener(QuitGame);
+                quitButton.onClick.RemoveListener(GameManager.Instance.QuitGame);
         }
         
-        private void QuitGame()
-        {
-            GameManager.Instance.QuitGame();
-        }
     }
 }

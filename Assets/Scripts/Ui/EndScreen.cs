@@ -20,17 +20,17 @@ namespace Ui
             button.onClick.AddListener(GameManager.Instance.RestartScene);
         }
 
-        private void OnDestroy()
-        {
-            button.onClick.RemoveListener(GameManager.Instance.RestartScene);
-        }
-
         public void SetMessage(bool success)
         {
             if (success)
                 message.text = $"Congrats you completed the level\nTime: {GameManager.Instance.Timer:F2}\nPoint: {GameManager.Instance.Point}";
             else
                 message.text = $"You lost !!\nTime: {GameManager.Instance.Timer:F2}\nPoint: {GameManager.Instance.Point}";
+        }
+        
+        private void OnDestroy()
+        {
+            button.onClick.RemoveListener(GameManager.Instance.RestartScene);
         }
     }
 }

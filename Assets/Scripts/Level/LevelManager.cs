@@ -1,5 +1,4 @@
-﻿using System;
-using GameCore;
+﻿using GameCore;
 using UnityEngine;
 
 namespace Level
@@ -17,7 +16,7 @@ namespace Level
         {
             if (GameManager.Instance != null)
             {
-                GameManager.Instance.OnModifyPoint += OnModifyPoint;
+                GameManager.Instance.OnModifyPoint += HandleModifyPoint;
             }
             else
             {
@@ -37,7 +36,7 @@ namespace Level
             OnTimeOut();
         }
 
-        public void OnTimeOut()
+        private void OnTimeOut()
         {
             OnExitLevel?.Invoke(false);
         }
@@ -83,7 +82,7 @@ namespace Level
             OnExitLevel?.Invoke(true);
         }
         
-        private void OnModifyPoint(int point)
+        private void HandleModifyPoint(int point)
         {
             VerifyIfLevelIsCompleted(point);
         }
@@ -92,7 +91,7 @@ namespace Level
         {
             if (GameManager.Instance != null)
             {
-                GameManager.Instance.OnModifyPoint -= OnModifyPoint;
+                GameManager.Instance.OnModifyPoint -= HandleModifyPoint;
             }
         }
     }

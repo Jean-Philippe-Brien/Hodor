@@ -21,13 +21,11 @@ namespace Level
 
         public Bounds GetLevelLimitBounds()
         {
-            if (levelLimit == null)
-            {
-                Debug.LogWarning("LevelLimit is not assigned. Returning an empty Bounds.");
-                return new Bounds();
-            }
+            if (levelLimit != null) return levelLimit.bounds;
+            
+            Debug.LogWarning("LevelLimit is not assigned. Returning an empty Bounds.");
+            return new Bounds();
 
-            return levelLimit.bounds;
         }
     }
 }

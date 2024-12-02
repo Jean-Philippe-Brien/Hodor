@@ -106,9 +106,9 @@ namespace Player
 
         private void ApplyRotation()
         {
-            var inputRotation = GetDirectionPressed().x;
-            
+            float inputRotation = GetDirectionPressed().x;
             Vector3 torque = Vector3.up * (inputRotation * playerMovementData.RotationSpeed);
+            
             _rigidbodyComponent.AddTorque(torque, ForceMode.Acceleration);
         }
 

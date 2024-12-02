@@ -17,12 +17,12 @@ namespace Ui
         {
             if (GameManager.Instance != null)
             {
-                GameManager.Instance.OnModifyPoint += OnModifyPoint;
+                GameManager.Instance.OnModifyPoint += HandleModifyPoint;
             }
 
             if (LevelManager.Instance != null)
             {
-                LevelManager.Instance.OnLevelCompleted += OnLevelCompleted;
+                LevelManager.Instance.OnLevelCompleted += HandleLevelCompleted;
                 SetMaxTimeText();
             }
         }
@@ -36,12 +36,12 @@ namespace Ui
         {
             maxTimeText.text = LevelManager.Instance.GetActualLevelMaxTimeToComplete().ToString(CultureInfo.InvariantCulture);
         }
-        private void OnLevelCompleted()
+        private void HandleLevelCompleted()
         {
             messageText.text = "DOOR UNLOCK";
         }
 
-        private void OnModifyPoint(int point)
+        private void HandleModifyPoint(int point)
         {
             pointText.text = $"Points: {point}";
         }
@@ -50,12 +50,12 @@ namespace Ui
         {
             if (GameManager.Instance != null)
             {
-                GameManager.Instance.OnModifyPoint -= OnModifyPoint;
+                GameManager.Instance.OnModifyPoint -= HandleModifyPoint;
             }
 
             if (LevelManager.Instance != null)
             {
-                LevelManager.Instance.OnLevelCompleted -= OnLevelCompleted;
+                LevelManager.Instance.OnLevelCompleted -= HandleLevelCompleted;
             }
         }
     }

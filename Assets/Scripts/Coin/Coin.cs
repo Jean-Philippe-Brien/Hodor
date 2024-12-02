@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Coin
 {
-[RequireComponent(typeof(Collider))]
+    [RequireComponent(typeof(Collider))]
     public class Coin : MonoBehaviour
     {
         public CoinInfo CoinInfo { get; private set; }

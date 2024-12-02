@@ -14,15 +14,10 @@ namespace Player
         [SerializeField]private InputAction jumpAction;
 
         public float MaxSpeed => maxSpeed;
-
         public float Acceleration => acceleration;
-
         public float RotationSpeed => rotationSpeed;
-
         public float JumpForce => jumpForce;
-
         public InputAction DirectionAction => directionAction;
-
         public InputAction JumpAction => jumpAction;
     }
 }

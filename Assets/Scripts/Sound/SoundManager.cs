@@ -7,15 +7,20 @@ namespace Sound
     [RequireComponent(typeof(AudioSource))]
     public class SoundManager : BaseManager<SoundManager>
     {
+        [SerializeField] private SoundData soundData;
+        
         private AudioSource _audioSource;
-        private Dictionary<SoundEnum.SoundName, SoundInfo> _soundsList = new Dictionary<SoundEnum.SoundName, SoundInfo>();
+        private Dictionary<SoundEnum.SoundName, SoundInfo> _soundsList;
     
         protected override void Awake()
         {
             base.Awake();
             
             _audioSource = GetComponent<AudioSource>();
-            _soundsList = Resources.Load<SoundData>("ScriptableObject/SoundData").GetSoundDictionary();
+            if(soundData != null)
+                _soundsList = soundData.GetSoundDictionary();
+            else
+                Debug.LogError("No SoundData Found in Sound Manager");
         }
 
         public void PlaySoundOneShot(SoundEnum.SoundName soundName)

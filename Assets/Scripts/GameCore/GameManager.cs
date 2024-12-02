@@ -9,16 +9,14 @@ namespace GameCore
         public event GameEvent.PauseGame OnPauseGame;
         public event GameEvent.ResumeGame OnResumeGame;
         
-        private bool _isGamePause;
-        
+        //We can use a system controlling timeScale instead of just a timer
         public float Timer { get; private set; }
         public int Point { get; private set; }
-
-        public bool IsGamePause => _isGamePause;
+        public bool IsGamePause { get; private set; }
 
         private void Update()
         {
-            if(!_isGamePause)
+            if(!IsGamePause)
                 UpdateTimer();
         }
 
@@ -40,17 +38,17 @@ namespace GameCore
 
         public void PauseGame()
         {
-            if (_isGamePause) return;
+            if (IsGamePause) return;
             
-            _isGamePause = true;
+            IsGamePause = true;
             OnPauseGame?.Invoke();
         }
 
         public void ResumeGame()
         {
-            if (!_isGamePause) return;
+            if (!IsGamePause) return;
             
-            _isGamePause = false;
+            IsGamePause = false;
             OnResumeGame?.Invoke();
         }
 

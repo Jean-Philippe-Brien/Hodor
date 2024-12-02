@@ -24,6 +24,8 @@ namespace Coin
             
             FillCoinList();
         }
+        
+        //all the next area can be isolated into a factory class !
 
         public void OnCoinCollected(Coin coin)
         {

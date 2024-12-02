@@ -18,8 +18,8 @@ namespace Ui
         {
             if (GameManager.Instance != null)
             {
-                GameManager.Instance.OnPauseGame += OnPauseGame;
-                GameManager.Instance.OnResumeGame += OnResumeGame;
+                GameManager.Instance.OnPauseGame += HandlePauseGame;
+                GameManager.Instance.OnResumeGame += HandleResumeGame;
             }
             else
             {
@@ -57,28 +57,31 @@ namespace Ui
             var isGamePaused = !GameManager.Instance.IsGamePause;
 
             if(isGamePaused)
-                OnPauseGame();
+                HandlePauseGame();
             else
-                OnResumeGame();
+                HandleResumeGame();
         }
 
         private void OnChangeScreen(UiScreen newScreen)
         {
-            if (_currentScreen == newScreen) return; // Avoid unnecessary changes
-            _currentScreen = newScreen;
-
+            if (_currentScreen == newScreen) return;
+            {
+                _currentScreen = newScreen;
+            }
+            
+            //Can be set with some event !! Advantage: Can do more than just 1 thing ... !!
             endScreen.gameObject.SetActive(newScreen == UiScreen.EndScreen);
             pauseScreen.gameObject.SetActive(newScreen == UiScreen.PauseScreen);
             gameScreen.gameObject.SetActive(newScreen == UiScreen.GameScreen);
         }
 
-        private void OnPauseGame()
+        private void HandlePauseGame()
         {
             GameManager.Instance.PauseGame();
             OnChangeScreen(UiScreen.PauseScreen);
         }
 
-        private void OnResumeGame()
+        private void HandleResumeGame()
         {
             GameManager.Instance.ResumeGame();
             OnChangeScreen(UiScreen.GameScreen);
@@ -97,8 +100,8 @@ namespace Ui
 
             if (GameManager.Instance != null)
             {
-                GameManager.Instance.OnPauseGame -= OnPauseGame;
-                GameManager.Instance.OnResumeGame -= OnResumeGame;
+                GameManager.Instance.OnPauseGame -= HandlePauseGame;
+                GameManager.Instance.OnResumeGame -= HandleResumeGame;
             }
 
             if (LevelManager.Instance != null)
