@@ -9,7 +9,6 @@ namespace GameCore
         public event GameEvent.PauseGame OnPauseGame;
         public event GameEvent.ResumeGame OnResumeGame;
         
-        //We can use a system controlling timeScale instead of just a timer
         public float Timer { get; private set; }
         public int Point { get; private set; }
         public bool IsGamePause { get; private set; }
